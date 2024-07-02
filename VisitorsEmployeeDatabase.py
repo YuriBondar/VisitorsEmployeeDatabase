@@ -31,16 +31,10 @@ if __name__ == "__main__":
         print("Type 'e' to create new record for employee")
         status = input("Type 'e' to create new record for employee: ")
         if status == "e":
-            while True:
                 fCreateNewEmployee()
-                if fCheckNewEmployee():
-                    fAddEmployee()
-                    break
         if status == "v":
-            while True:
                 fCreateNewVisitor()
-                if fCheckVisitor():
-                    break
+
             if isEmployeeIndatabase():
                 fAddVisitor()
                 break
