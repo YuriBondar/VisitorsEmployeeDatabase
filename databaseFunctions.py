@@ -15,7 +15,6 @@ from inputFieldsFunctions import *
 #
 #
 #     employee = ["Employee"]
-#
 #     employee.append(fInputAndCheckName("Nachname"))
 #     employee.append(fInputAndCheckName("Vorname"))
 #     employee.append(fInputAndCheckTitle())

@@ -31,7 +31,6 @@ import datetime
 #             print(f"Incorrect Title. Title should contain only letters, LeerZeichen, Punkt and '-'")
 #
 # def fInputAndCheckTel():
-#
 #     while True:
 #         userInput = input(f"Input Telefonnummer :")
 #         isNum = True
