@@ -6,28 +6,6 @@ from databaseFunctions import *
 
 if __name__ == "__main__":
 
-    employeesPositions = (
-    "Status: Mitarbeiter*inn oder Besucher*inn",
-    "Nachname",
-    "Vorname",
-    "Title"
-    "Telefonnummer",
-    "E-Mail",
-    "Sozialversicherungsnummer",
-    "Arbeitet im Unternehmen seit:",
-    )
-
-    visitorsPositions = (
-        "Status: Mitarbeiter*inn oder Besucher*inn",
-        "Nachname",
-        "Vorname",
-        "Telefonnummer",
-        "E-Mail",
-        "Tag und Zeit des Besuchs"
-        "Verantwortlicher Manager")
-
-    employee = ["", "", "", 0, "", "", "", ""]
-    visitor = ["", "", "", 0, "", "", ""]
     employeesList = []
     visitorsList = []
 
