@@ -98,12 +98,14 @@ def fCreateNewEmployeeV2():
         "Nachname",
         "Vorname",
         "Title",
-        "E-Mail"
+        "E-Mail",
         "Telefonnummer",
         "Sozialversicherungsnummer",
         "Arbeitet im Unternehmen seit:")
 
     employee = ["Mitarbeiter*inn"]
+
+    employee.append(fInputAndCheckStartDate())
 
     for i in range(5):
         while True:
@@ -112,7 +114,7 @@ def fCreateNewEmployeeV2():
                 employee.append(userInput)
                 break
 
-    employee.append(fInputAndCheckStartDate())
+    #employee.append(fInputAndCheckStartDate())
     return employee
 
 def fCreateNewVisitor():
@@ -126,6 +128,8 @@ def fCreateNewVisitor():
         "Tag und Zeit des Besuchs")
 
     visitor = ["Visitor*inn"]
+
+
 
     for i in range(4):
         while True:

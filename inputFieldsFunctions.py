@@ -67,12 +67,13 @@ def fInputAndCheckStartDate():
         userInput = input(f"Arbeitet im Unternehmen seit (format: dd.mm.yyyy): ")
         dataList = userInput.rsplit(".")
         try:
-            startDay = datetime.datetime(dataList[0], dataList[1], dataList[2])
+            startDay = datetime.datetime(int(dataList[2]), int(dataList[1]), int(dataList[0]))
+            print(startDay)
             if startDay <= datetime.datetime.now():
                 return userInput
-            else:
-                continue
-        except:
+        except ValueError:
             print(f"Incorrect Date. Format: dd.mm.yyyy")
+            continue
+
 
 
