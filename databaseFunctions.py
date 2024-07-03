@@ -3,85 +3,139 @@ from inputFieldsFunctions import *
 
 
 def fCreateNewEmployeeV2():
-    employeeData = (
-        "Status: Mitarbeiter*inn",
-        "Nachname",
-        "Vorname",
-        "Title",
-        "E-Mail",
-        "Telefonnummer",
-        "Sozialversicherungsnummer",
-        "Arbeitet im Unternehmen seit:")
+
+    # Daten für den Mitarbeiter
+    #     Status: Mitarbeiter*inn
+    #     Nachname
+    #     Vorname
+    #     Geschlecht"
+    #     Title",
+    #     Sozialversicherungsnummer"
+    #     E-Mail",
+    #     Telefonnummer",
+    #     Adresse: Ort, Straße, Hausnummer
+    #     Geburtsdatum
 
     employee = ["Mitarbeiter*inn"]
 
     while True:
-        userInput = input(f"Input Nachname :")
+        userInput = input("Nachname: ")
         if isEmpty(userInput):
             if (fCheckName(userInput)):
                 employee.append(userInput)
                 break
 
     while True:
-        userInput = input(f"Input Vorname :")
+        userInput = input("Vorname: ")
         if isEmpty(userInput):
             if (fCheckName(userInput)):
                 employee.append(userInput)
                 break
 
+    while True:
+        userInput = input("Geschlecht(m oder w): ")
+        if isEmpty(userInput):
+            if (fCheckGeschlecht(userInput)):
+                employee.append(userInput)
+                if userInput == "m":
+                    employee[0] = "Mitarbeiter"
+                else:
+                    employee[0] = "Mitarbeiterinn"
 
-    for i in range(5):
-        while True:
-            userInput = input(f"Input {employeeData[i+1]} :")
-            if fCheckData(employeeData[i+1], userInput):
+                break
+
+    while True:
+        userInput = input("Title:")
+        if (fCheckTitle(userInput)):
+            employee.append(userInput)
+            break
+
+    while True:
+        userInput = input("Sozialversicherungsnummer: ")
+        if isEmpty(userInput):
+            if (fCheckInsurance(userInput)):
                 employee.append(userInput)
                 break
 
-    employee.append(fInputAndCheckStartDate())
-    return employee
+    while True:
+        userInput = input("E-mail: ")
+        if (fCheckEmail(userInput)):
+            employee.append(userInput)
+            break
+
+    while True:
+        userInput = input("Telefonnummer: ")
+        if (fChekPhone(userInput)):
+            employee.append(userInput)
+            break
+
+    while True:
+        userInput = input("Adresse. Ort: ")
+        if (fCheckName(userInput)):
+            employee.append(userInput)
+            break
+
+    while True:
+        userInput = input("Adresse. Straße: ")
+        if (fCheckName(userInput)):
+            employee.append(userInput)
+            break
+
+    while True:
+        userInput = input("Geburtsdatum: ")
+        if (fInputAndCheckStartDate()):
+            employee.append(userInput)
+            break
+
 
 def fCreateNewVisitor():
-    visitorData = (
-        "Status: Visitor*inn",
-        "Nachname",
-        "Vorname",
-        "E-Mail"
-        "Telefonnummer",
-        "Verantwortlicher Manager",
-        "Tag und Zeit des Besuchs")
+    #     Daten für den Mitarbeiter:
+    #     Status: Besucher*inn
+    #     Nachname
+    #     Vorname
+    #     E-Mail
+    #     Telefonnummer
+    #     Verantwortlicher Manager
+    #     Tag und Zeit des Besuchs
 
     visitor = ["Visitor*inn"]
 
-    for i in range(4):
-        while True:
-            userInput = input(f"Input {visitorData[i + 1]} :")
-            if fCheckData(visitorData[i + 1], userInput):
+    while True:
+        userInput = input("Nachname: ")
+        if isEmpty(userInput):
+            if (fCheckName(userInput)):
                 visitor.append(userInput)
                 break
 
-    visitor.append(fInputAndCheckStartDate())
-    return visitor
+    while True:
+        userInput = input("Vorname: ")
+        if isEmpty(userInput):
+            if (fCheckName(userInput)):
+                visitor.append(userInput)
+                break
 
+    while True:
+        userInput = input("E-mail: ")
+        if (fCheckEmail(userInput)):
+            visitor.append(userInput)
+            break
 
+    while True:
+        userInput = input("Telefonnummer: ")
+        if (fChekPhone(userInput)):
+            visitor.append(userInput)
+            break
 
+    while True:
+        userInput = input("Verantwortlicher Manager: ")
+        if isEmpty(userInput):
+            if (fCheckName(userInput)):
+                visitor.append(userInput)
+                break
 
+    while True:
+        userInput = input("Tag und Zeit des Besuchs: ")
+        if (fInputAndCheckStartDate()):
+            visitor.append(userInput)
+            break
 
-
-
-
-
-
-
-
-
-def fCreateNewVisitor():
-    pass
-
-def isEmployeeInDatabase():
-    pass
-
-def fAddVisitor():
-    pass
-
-def fcorrectVisitor():
-    pass
