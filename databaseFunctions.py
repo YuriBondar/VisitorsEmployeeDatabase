@@ -22,14 +22,14 @@ def fCreateNewEmployeeV2():
 
     while True:
         userInput = input("Nachname: ")
-        if isEmpty(userInput):
+        if not isEmpty(userInput):
             if (fCheckName(userInput)):
                 employee.append(userInput)
                 break
 
     while True:
         userInput = input("Vorname: ")
-        if isEmpty(userInput):
+        if not isEmpty(userInput):
             if (fCheckName(userInput)):
                 employee.append(userInput)
                 break
@@ -53,7 +53,7 @@ def fCreateNewEmployeeV2():
 
     while True:
         userInput = input("Sozialversicherungsnummer: ")
-        if isEmpty(userInput):
+        if not isEmpty(userInput):
             if (fCheckInsurance(userInput)):
                 employee.append(userInput)
                 break
@@ -83,12 +83,12 @@ def fCreateNewEmployeeV2():
             break
 
     while True:
-        userInput = input("Geburtsdatum: ")
-        if (fInputAndCheckStartDate()):
+        userInput = input("Geburtsdatum (format: dd.mm.yyyy):")
+        if (fInputAndCheckStartDate(userInput)):
             employee.append(userInput)
             break
 
-
+    return employee
 def fCreateNewVisitor():
     #     Daten für den Mitarbeiter:
     #     Status: Besucher*inn
@@ -103,14 +103,14 @@ def fCreateNewVisitor():
 
     while True:
         userInput = input("Nachname: ")
-        if isEmpty(userInput):
+        if not isEmpty(userInput):
             if (fCheckName(userInput)):
                 visitor.append(userInput)
                 break
 
     while True:
         userInput = input("Vorname: ")
-        if isEmpty(userInput):
+        if not isEmpty(userInput):
             if (fCheckName(userInput)):
                 visitor.append(userInput)
                 break
@@ -129,7 +129,7 @@ def fCreateNewVisitor():
 
     while True:
         userInput = input("Verantwortlicher Manager: ")
-        if isEmpty(userInput):
+        if not isEmpty(userInput):
             if (fCheckName(userInput)):
                 visitor.append(userInput)
                 break
@@ -139,4 +139,5 @@ def fCreateNewVisitor():
         if (fInputAndCheckStartDate()):
             visitor.append(userInput)
             break
+    return visitor
 

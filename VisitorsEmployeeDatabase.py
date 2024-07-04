@@ -34,7 +34,7 @@ if __name__ == "__main__":
                 reader = csv.reader(file)
                 for row in reader:
                     print(row)
-        else:
+        if status == "5":
             break
 
 

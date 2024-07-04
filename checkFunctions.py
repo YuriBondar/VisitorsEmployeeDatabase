@@ -7,23 +7,23 @@ import datetime
 def isEmpty(userInput):
     if userInput == "":
         print("Dieses Feld darf nicht leer sein")
-        return False
-    else:
         return True
-def fCheckName(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyz -"
-    if userInput[0] == " " or userInput[0] == "-":
-        print("An erster Stelle muss ein Buchstabe stehen.")
-        return False
     else:
-        if all(letter.lower() in mylist for letter in userInput):
-            return True
-        else:
-            print("Geben Sie nur Buchstaben, Leerzeichen oder das Zeichen '-' ein")
-            return False
+        return False
+def fCheckName(userInput):
+    mylist = "abcdefghijklmnopqrstuvwxyzöäüß -"
+    # if userInput[0] == " " or userInput[0] == "-":
+    #     print("An erster Stelle muss ein Buchstabe stehen.")
+    #     return False
+    # else:
+    if all(letter.lower() in mylist for letter in userInput):
+        return True
+    else:
+        print("Geben Sie nur Buchstaben, Leerzeichen oder das Zeichen '-' ein")
+        return False
 
 def fCheckTitle(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyz -."
+    mylist = "abcdefghijklmnopqrstuvwxyzöäüß -."
     if all(letter.lower() in mylist for letter in userInput):
         return True
     else:
@@ -38,6 +38,8 @@ def fCheckGeschlecht(userInput):
         return False
 
 def fCheckEmail(userInput):
+    if userInput == "":
+        return True;
     mylist = "abcdefghijklmnopqrstuvwxyz .@"
     if isEmpty(userInput):
         return True
@@ -82,7 +84,7 @@ def fCheckInsurance(userInput):
     return True
 
 def fCheckStreet(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyz -."
+    mylist = "abcdefghijklmnopqrstuvwxyzöäüß -."
     if userInput[0] == " " or userInput[0] == "-" or userInput[0] == ".":
         print("An erster Stelle muss ein Buchstabe stehen.")
         return False
@@ -106,19 +108,16 @@ def fCheckHaus(userInput):
             return False
 
 
-def fInputAndCheckStartDate():
-    while True:
-        userInput = input("Geburtsdatum (format: dd.mm.yyyy): ")
-        if userInput[2] != "." and userInput[5] != ".":
-            print("Incorrect Date. Format: dd.mm.yyyy")
-            continue
-        else:
-            dataList = userInput.rsplit(".")
-            try:
-                startDay = datetime.datetime(int(dataList[2]), int(dataList[1]), int(dataList[0]))
-                print(startDay)
-                if startDay <= datetime.datetime.now():
-                    return userInput
-            except ValueError:
-                print(f"Incorrect Date. Format: dd.mm.yyyy")
-                continue
+def fInputAndCheckStartDate(userInput):
+    if userInput[2] != "." and userInput[5] != ".":
+        print("Incorrect Date. Format: dd.mm.yyyy")
+        return False
+    else:
+        dataList = userInput.rsplit(".")
+        try:
+            startDay = datetime.datetime(int(dataList[2]), int(dataList[1]), int(dataList[0]))
+            if startDay <= datetime.datetime.now():
+                return True
+        except ValueError:
+            print(f"Incorrect Date. Format: dd.mm.yyyy")
+            return False
