@@ -10,25 +10,26 @@ def isEmpty(userInput):
         return True
     else:
         return False
-def fCheckName(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyzöäüß -"
-    # if userInput[0] == " " or userInput[0] == "-":
-    #     print("An erster Stelle muss ein Buchstabe stehen.")
-    #     return False
-    # else:
-    if all(letter.lower() in mylist for letter in userInput):
-        return True
+def fCheckWord(userInput, isPoint):
+    if isPoint == True:
+        mylist = "abcdefghijklmnopqrstuvwxyzöäüß -."
     else:
-        print("Geben Sie nur Buchstaben, Leerzeichen oder das Zeichen '-' ein")
-        return False
+        mylist = "abcdefghijklmnopqrstuvwxyzöäüß -"
 
-def fCheckTitle(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyzöäüß -."
-    if all(letter.lower() in mylist for letter in userInput):
+    if isEmpty(userInput):
+        return False
+    elif userInput[0] == "-" or userInput[0] == "." or userInput[len(userInput)-1] == "-":
+        print("An erster oder letzter Stelle muss ein Buchstabe stehen.")
+        return False
+    elif all(letter.lower() in mylist for letter in userInput):
         return True
     else:
-        print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
-        return False
+        if isPoint == True:
+            print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
+            return False
+        else:
+            print("Geben Sie nur Buchstaben, Leerzeichen oder das Zeichen '-' ein")
+            return False
 
 def fCheckGeschlecht(userInput):
     if userInput == "m" or userInput == "w":
@@ -38,67 +39,60 @@ def fCheckGeschlecht(userInput):
         return False
 
 def fCheckEmail(userInput):
-    if userInput == "":
-        return True;
-    mylist = "abcdefghijklmnopqrstuvwxyz .@"
+    mylist = "abcdefghijklmnopqrstuvwxyz0123456789 .-_@"
     if isEmpty(userInput):
-        return True
-    count = 0
-    for letter in userInput:
-        if letter == "@":
-            count = count + 1
-
-    if count != 1:
-        print("Die E-Mail-Adresse muss genau einen @-Symbol enthalten.")
         return False
-    if userInput[0] == "@" or userInput[len(userInput)-1] == "@":
-        print("Das Zeichen @ darf nicht an der ersten oder letzten Stelle in der E-Mail-Adresse stehen.")
+    elif userInput[0] == "@" or userInput[0] == "@":
+        print("Die E-Mail-Adresse darf nicht mit '@' beginnen oder enden.")
+        return False
+    elif userInput.count("@") != 1:
+        print("Die E-Mail-Adresse muss genau einen @-Symbol enthalten.")
         return False
     else:
         splitEmail = userInput.rsplit("@")
         if all('.' not in letter for letter in splitEmail[1]):
             print("Die E-Mail-Adresse muss mindestens einen Punkt nach dem @-Symbol enthalten.")
             return False
-    if all(letter.lower() in mylist for letter in userInput):
-        return True
-    else:
-        print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
-        return False
-
-def fChekPhone(userInput):
-    mylist = "0123456789()-"
-    if all(letter.lower() in mylist for letter in userInput):
-        return True
-    else:
-        print("Bitte geben Sie nur Zahlen oder folgende Symbole: '-', '(',')' ein.")
-        return False
-def fCheckInsurance(userInput):
-    if len(userInput) != 8:
-        print("Die Sozialversicherungsnummer muss aus 8 Zahlen bestehen")
-        return False
-    else:
-        for letter in userInput:
-            if not letter.isnumeric():
-                print("Bitte geben Sie nur Zahlen ein")
-                return False
-    return True
-
-def fCheckStreet(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyzöäüß -."
-    if userInput[0] == " " or userInput[0] == "-" or userInput[0] == ".":
-        print("An erster Stelle muss ein Buchstabe stehen.")
-        return False
-    else:
-        if all(letter.lower() in mylist for letter in userInput):
+        elif (splitEmail[0][0] == "." or
+              splitEmail[0][len(splitEmail[0])-1] == "." or
+              splitEmail[1][0] == "." or
+              splitEmail[1][len(splitEmail[1])-1] == "." or
+              splitEmail[1][0] == "-" or
+              splitEmail[1][len(splitEmail[1])-1] == "-"):
+            print("Incorrect Email")
+            return False
+        elif all(letter.lower() in mylist for letter in userInput):
             return True
         else:
             print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
             return False
 
+def fChekPhone(userInput):
+    mylist = "0123456789()- "
+    if isEmpty(userInput):
+        return False
+    elif all(letter.lower() in mylist for letter in userInput):
+        return True
+    else:
+        print("Bitte geben Sie nur Zahlen, Leerzeichen oder folgende Symbole: '-', '(',')' ein.")
+        return False
+def fCheckInsurance(userInput):
+    if isEmpty(userInput):
+        return False
+    elif len(userInput) != 8:
+        print("Die Sozialversicherungsnummer muss aus 8 Zahlen bestehen")
+        return False
+    elif userInput.isnumeric():
+        return True
+    else:
+        return False
+
 def fCheckHaus(userInput):
     mylist = "abcdefghijklmnopqrstuvwxyz0123456789-/"
-    if userInput[0] == " " or userInput[0] == "-" or userInput[0] == ".":
-        print("An erster Stelle muss ein Buchstabe stehen.")
+    if isEmpty(userInput):
+        return False
+    elif not userInput[0].isnumeric():
+        print("An erster Stelle muss ein Zahl stehen.")
         return False
     else:
         if all(letter.lower() in mylist for letter in userInput):
@@ -109,7 +103,9 @@ def fCheckHaus(userInput):
 
 
 def fInputAndCheckStartDate(userInput):
-    if userInput[2] != "." and userInput[5] != ".":
+    if isEmpty(userInput):
+        return False
+    elif userInput[2] != "." and userInput[5] != ".":
         print("Incorrect Date. Format: dd.mm.yyyy")
         return False
     else:

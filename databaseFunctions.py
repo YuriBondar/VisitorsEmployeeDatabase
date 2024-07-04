@@ -2,7 +2,9 @@
 from checkFunctions import *
 
 #----------------------------------------------------------------------
-#Modul für Datenbankfunktionen: Hinzufügen eines Mitarbeiters oder Besuchers
+#Modul für Datenbankfunktionen:
+# 1.Hinzufügen eines Mitarbeiters
+# 2.Hinzufügen eines Besuchers
 #-----------------------------------------------------------------------
 def fCreateNewEmployeeV2():
 
@@ -22,17 +24,15 @@ def fCreateNewEmployeeV2():
 
     while True:
         userInput = input("Nachname: ")
-        if not isEmpty(userInput):
-            if (fCheckName(userInput)):
-                employee.append(userInput)
-                break
+        if (fCheckWord(userInput, False)):
+            employee.append(userInput)
+            break
 
     while True:
         userInput = input("Vorname: ")
-        if not isEmpty(userInput):
-            if (fCheckName(userInput)):
-                employee.append(userInput)
-                break
+        if (fCheckWord(userInput, False)):
+            employee.append(userInput)
+            break
 
     while True:
         userInput = input("Geschlecht(m oder w): ")
@@ -42,21 +42,19 @@ def fCreateNewEmployeeV2():
                 employee[0] = "Mitarbeiter"
             else:
                 employee[0] = "Mitarbeiterinn"
-
             break
 
     while True:
         userInput = input("Title:")
-        if (fCheckTitle(userInput)):
+        if (fCheckWord(userInput, True)):
             employee.append(userInput)
             break
 
     while True:
         userInput = input("Sozialversicherungsnummer: ")
-        if not isEmpty(userInput):
-            if (fCheckInsurance(userInput)):
-                employee.append(userInput)
-                break
+        if (fCheckInsurance(userInput)):
+            employee.append(userInput)
+            break
 
     while True:
         userInput = input("E-mail: ")
@@ -72,13 +70,19 @@ def fCreateNewEmployeeV2():
 
     while True:
         userInput = input("Adresse. Ort: ")
-        if (fCheckName(userInput)):
+        if (fCheckWord(userInput, True)):
             employee.append(userInput)
             break
 
     while True:
         userInput = input("Adresse. Straße: ")
-        if (fCheckName(userInput)):
+        if (fCheckWord(userInput, True)):
+            employee.append(userInput)
+            break
+
+    while True:
+        userInput = input("Adresse. Hausnummer: ")
+        if (fCheckHaus(userInput)):
             employee.append(userInput)
             break
 
@@ -103,17 +107,15 @@ def fCreateNewVisitor():
 
     while True:
         userInput = input("Nachname: ")
-        if not isEmpty(userInput):
-            if (fCheckName(userInput)):
-                visitor.append(userInput)
-                break
+        if (fCheckWord(userInput, False)):
+            visitor.append(userInput)
+            break
 
     while True:
         userInput = input("Vorname: ")
-        if not isEmpty(userInput):
-            if (fCheckName(userInput)):
-                visitor.append(userInput)
-                break
+        if (fCheckWord(userInput, False)):
+            visitor.append(userInput)
+            break
 
     while True:
         userInput = input("E-mail: ")
@@ -129,14 +131,13 @@ def fCreateNewVisitor():
 
     while True:
         userInput = input("Verantwortlicher Manager: ")
-        if not isEmpty(userInput):
-            if (fCheckName(userInput)):
-                visitor.append(userInput)
-                break
+        if (fCheckWord(userInput, False)):
+            visitor.append(userInput)
+            break
 
     while True:
         userInput = input("Tag und Zeit des Besuchs: ")
-        if (fInputAndCheckStartDate()):
+        if (fInputAndCheckStartDate(userInput)):
             visitor.append(userInput)
             break
     return visitor
