@@ -1,6 +1,9 @@
 
 import datetime
 
+#----------------------------------------------------------------------
+#Modul für Datenprüfungsfunktionen
+#-----------------------------------------------------------------------
 def isEmpty(userInput):
     if userInput == "":
         print("Dieses Feld darf nicht leer sein")
@@ -21,25 +24,23 @@ def fCheckName(userInput):
 
 def fCheckTitle(userInput):
     mylist = "abcdefghijklmnopqrstuvwxyz -."
-    if userInput[0] == " " or userInput[0] == "-" or userInput[0] == ".":
-        print("An erster Stelle muss ein Buchstabe stehen.")
-        return False
-    if userInput[len(userInput)-1] != ".":
-        print("An letzter Stelle muss nur ein Punkt stehen.")
-        return False
+    if all(letter.lower() in mylist for letter in userInput):
+        return True
     else:
-        if all(letter.lower() in mylist for letter in userInput):
-            return True
-        else:
-            print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
-            return False
+        print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
+        return False
 
 def fCheckGeschlecht(userInput):
     if userInput == "m" or userInput == "w":
         return True
+    else:
+        print("Geben Sie nur 'm' oder 'w' ein.")
+        return False
 
 def fCheckEmail(userInput):
     mylist = "abcdefghijklmnopqrstuvwxyz .@"
+    if isEmpty(userInput):
+        return True
     count = 0
     for letter in userInput:
         if letter == "@":
@@ -47,6 +48,9 @@ def fCheckEmail(userInput):
 
     if count != 1:
         print("Die E-Mail-Adresse muss genau einen @-Symbol enthalten.")
+        return False
+    if userInput[0] == "@" or userInput[len(userInput)-1] == "@":
+        print("Das Zeichen @ darf nicht an der ersten oder letzten Stelle in der E-Mail-Adresse stehen.")
         return False
     else:
         splitEmail = userInput.rsplit("@")

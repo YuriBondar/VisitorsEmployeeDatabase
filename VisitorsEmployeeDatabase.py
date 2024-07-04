@@ -2,6 +2,7 @@ import csv
 
 from databaseFunctions import *
 
+#----------------------main-----------------------------------------
 
 if __name__ == "__main__":
 
@@ -9,8 +10,8 @@ if __name__ == "__main__":
     print("Willkommen in der Datenbank!")
     while True:
         print("Wählen die Option:")
-        print("1. Neuen Eintrag für Besucher erstellen")
-        print("2. Neuen Eintrag für Mitarbeiter erstellen")
+        print("1. Neuen Eintrag für Mitarbeiter*innen erstellen")
+        print("2. Neuen Eintrag für Besucher*innen erstellen")
         print("3. Die Liste der Mitarbeiter*innen anzeigen.")
         print("4. Die Liste der Besucher*innen anzeigen")
         print("5. die Arbeit mit der Datenbank beenden")

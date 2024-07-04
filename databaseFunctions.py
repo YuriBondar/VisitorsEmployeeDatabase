@@ -1,7 +1,9 @@
 
-from inputFieldsFunctions import *
+from checkFunctions import *
 
-
+#----------------------------------------------------------------------
+#Modul für Datenbankfunktionen: Hinzufügen eines Mitarbeiters oder Besuchers
+#-----------------------------------------------------------------------
 def fCreateNewEmployeeV2():
 
     # Daten für den Mitarbeiter
@@ -34,15 +36,14 @@ def fCreateNewEmployeeV2():
 
     while True:
         userInput = input("Geschlecht(m oder w): ")
-        if isEmpty(userInput):
-            if (fCheckGeschlecht(userInput)):
-                employee.append(userInput)
-                if userInput == "m":
-                    employee[0] = "Mitarbeiter"
-                else:
-                    employee[0] = "Mitarbeiterinn"
+        if (fCheckGeschlecht(userInput)):
+            employee.append(userInput)
+            if userInput == "m":
+                employee[0] = "Mitarbeiter"
+            else:
+                employee[0] = "Mitarbeiterinn"
 
-                break
+            break
 
     while True:
         userInput = input("Title:")
