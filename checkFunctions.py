@@ -102,7 +102,7 @@ def fCheckHaus(userInput):
             return False
 
 
-def fInputAndCheckStartDate(userInput):
+def fCheckDate(userInput):
     if isEmpty(userInput):
         return False
     elif userInput[2] != "." and userInput[5] != ".":

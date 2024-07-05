@@ -41,7 +41,7 @@ def fCreateNewEmployeeV2():
             if userInput == "m":
                 employee[0] = "Mitarbeiter"
             else:
-                employee[0] = "Mitarbeiterinn"
+                employee[0] = "Mitarbeiterin"
             break
 
     while True:
@@ -88,7 +88,7 @@ def fCreateNewEmployeeV2():
 
     while True:
         userInput = input("Geburtsdatum (format: dd.mm.yyyy):")
-        if (fInputAndCheckStartDate(userInput)):
+        if (fCheckDate(userInput)):
             employee.append(userInput)
             break
 
@@ -137,7 +137,7 @@ def fCreateNewVisitor():
 
     while True:
         userInput = input("Tag und Zeit des Besuchs: ")
-        if (fInputAndCheckStartDate(userInput)):
+        if (fCheckDate(userInput)):
             visitor.append(userInput)
             break
     return visitor
