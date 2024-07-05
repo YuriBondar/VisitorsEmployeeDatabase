@@ -27,7 +27,7 @@ def fCreateNewEmployee():
 
     # for i in    r ange(2):
     #     while True:
-    #         userInput = input(f"Input {employeesPositions[i]} :")
+    #         userInput = input(f"Input   {employeesPositions[i]} :")
     #         if isString(userInput):
     #             employee[i] = userInput
     #             break
