@@ -39,7 +39,7 @@ def fCheckGeschlecht(userInput):
         return False
 
 def fCheckEmail(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyz0123456789 .-_@"
+    mylist = "abcdefghijklmnopqrstuvwxyz0123456789.-_@"
     if isEmpty(userInput):
         return False
     elif userInput[0] == "@" or userInput[0] == "@":
