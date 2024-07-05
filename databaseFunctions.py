@@ -25,7 +25,7 @@ def fCreateNewEmployee():
     return employee
 
 
-    # for i in range(2):
+    # for i in    r ange(2):
     #     while True:
     #         userInput = input(f"Input {employeesPositions[i]} :")
     #         if isString(userInput):
