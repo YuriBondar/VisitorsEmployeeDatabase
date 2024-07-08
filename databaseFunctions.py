@@ -6,7 +6,7 @@ from checkFunctions import *
 # 1.Hinzufügen eines Mitarbeiters
 # 2.Hinzufügen eines Besuchers
 #-----------------------------------------------------------------------
-def fCreateNewEmployeeV2():
+def fCreateNewEmployee():
 
     # Daten für den Mitarbeiter
     #     Status: Mitarbeiter*inn
