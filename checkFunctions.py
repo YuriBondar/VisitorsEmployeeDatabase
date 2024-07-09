@@ -1,35 +1,29 @@
 
 import datetime
+import re
 
 #----------------------------------------------------------------------
 #Modul für Datenprüfungsfunktionen
 #-----------------------------------------------------------------------
-def isEmpty(userInput):
-    if userInput == "":
-        print("Dieses Feld darf nicht leer sein")
-        return True
-    else:
-        return False
+
 def fCheckWord(userInput, isPoint):
     if isPoint == True:
-        mylist = "abcdefghijklmnopqrstuvwxyzöäüß -."
+        pattern = r'^([a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-\.]*[a-zA-ZüäößÜÄÖß \.])?$'
     else:
-        mylist = "abcdefghijklmnopqrstuvwxyzöäüß -"
+        pattern = r'^[a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-]*[a-zA-ZüäößÜÄÖß ]$'
 
-    if isEmpty(userInput):
-        if isPoint == False:
-            return False
-    elif userInput[0] == "-" or userInput[0] == "." or userInput[len(userInput)-1] == "-":
-        print("An erster oder letzter Stelle muss ein Buchstabe stehen.")
-        return False
-    elif all(letter.lower() in mylist for letter in userInput):
+    if re.match(pattern, userInput) is not None:
         return True
     else:
         if isPoint == True:
-            print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
+            print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.\n"
+                  "Das Feld darf nicht leer sein.\n"
+                  " An der ersten und letzten Position darf kein Bindestrich stehen.")
             return False
         else:
-            print("Geben Sie nur Buchstaben, Leerzeichen oder das Zeichen '-' ein")
+            print("Geben Sie nur Buchstaben, Leerzeichen, oder das Zeichen '-' ein.\n"
+                  "An der ersten Position darf kein Bindestrich und Punkt stehen\n"
+                  "An der letzten Position darf kein Bindestrich stehen ")
             return False
 
 def fCheckGeschlecht(userInput):
@@ -40,47 +34,39 @@ def fCheckGeschlecht(userInput):
         return False
 
 def fCheckEmail(userInput):
-    mylist = "abcdefghijklmnopqrstuvwxyz0123456789.-_@"
-    if isEmpty(userInput):
-        return False
-    elif userInput[0] == "@" or userInput[0] == "@":
-        print("Die E-Mail-Adresse darf nicht mit '@' beginnen oder enden.")
-        return False
-    elif userInput.count("@") != 1:
-        print("Die E-Mail-Adresse muss genau einen @-Symbol enthalten.")
+    pattern = r'^[\wÜÄÖß\+\.-]+@[\wÜÄÖß\+-]+\.[\wÜÄÖß\+-\.]+$'
+    errorMassage = "Ungültige Email"
+
+    if re.match(pattern, userInput) is None:
+        print(errorMassage)
         return False
     else:
-        splitEmail = userInput.rsplit("@")
-        if all('.' not in letter for letter in splitEmail[1]):
-            print("Die E-Mail-Adresse muss mindestens einen Punkt nach dem @-Symbol enthalten.")
+        localPart, domainPart = userInput.split('@')
+        domains = domainPart.split('.')
+        if localPart[0] == "." or localPart[len(localPart)-1] == ".":
+            print(errorMassage)
             return False
-        elif (splitEmail[0][0] == "." or
-              splitEmail[0][len(splitEmail[0])-1] == "." or
-              splitEmail[1][0] == "." or
-              splitEmail[1][len(splitEmail[1])-1] == "." or
-              splitEmail[1][0] == "-" or
-              splitEmail[1][len(splitEmail[1])-1] == "-"):
-            print("Incorrect Email")
+        elif ".." in localPart:
+            print(errorMassage)
             return False
-        elif all(letter.lower() in mylist for letter in userInput):
-            return True
         else:
-            print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.")
-            return False
+            for domain in domains:
+                if domain == "" or domain[0] == "-" or localPart[len(localPart)-1] == "-":
+                    print(errorMassage)
+                    return False
+    return True
 
 def fChekPhone(userInput):
-    mylist = "0123456789()- "
-    if isEmpty(userInput):
+    patternForRemove = r'^[ -\)\(]$'
+    pattern = r'^[0-9 -]+$'
+    userInput = re.sub( patternForRemove, '', userInput)
+
+    if re.match(pattern, userInput) is None and len(userInput) != 12:
+        print("Ungültige Telefonnummer")
         return False
-    elif all(letter.lower() in mylist for letter in userInput):
-        return True
-    else:
-        print("Bitte geben Sie nur Zahlen, Leerzeichen oder folgende Symbole: '-', '(',')' ein.")
-        return False
+
 def fCheckInsurance(userInput):
-    if isEmpty(userInput):
-        return False
-    elif len(userInput) != 8:
+    if len(userInput) != 8:
         print("Die Sozialversicherungsnummer muss aus 8 Zahlen bestehen")
         return False
     elif userInput.isnumeric():
@@ -90,9 +76,7 @@ def fCheckInsurance(userInput):
 
 def fCheckHaus(userInput):
     mylist = "abcdefghijklmnopqrstuvwxyz0123456789-/"
-    if isEmpty(userInput):
-        return False
-    elif not userInput[0].isnumeric():
+    if not userInput[0].isnumeric():
         print("An erster Stelle muss ein Zahl stehen.")
         return False
     else:
@@ -104,9 +88,7 @@ def fCheckHaus(userInput):
 
 
 def fCheckDate(userInput):
-    if isEmpty(userInput):
-        return False
-    elif userInput[2] != "." and userInput[5] != ".":
+    if userInput[2] != "." and userInput[5] != ".":
         print("Incorrect Date. Format: dd.mm.yyyy")
         return False
     else:

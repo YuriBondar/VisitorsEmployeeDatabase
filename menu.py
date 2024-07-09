@@ -33,7 +33,8 @@ def fMenu():
                  "Neuen Eintrag für Besucher*innen erstellen",
                  "Die Liste der Mitarbeiter*innen anzeigen",
                  "Die Liste der Besucher*innen anzeigen",
-                 "Die Arbeit mit der Datenbank beenden"]
+                 "Die Arbeit mit der Datenbank beenden",
+                 "Aus der Datenbank auswählen"]
 
     print("Willkommen in der Datenbank!")
     while True:
@@ -50,6 +51,8 @@ def fMenu():
         elif status == "4":
             fPrintFile('Visitors.csv')
         elif status == "5":
+            fSelect
+        elif status == "6":
             break
         else:
             print("Geben Sie eine Zahl aus den Menüpunkten")

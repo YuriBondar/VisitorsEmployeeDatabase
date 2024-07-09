@@ -65,6 +65,8 @@ def fCreateNewEmployee():
     while True:
         userInput = input("Telefonnummer: ")
         if (fChekPhone(userInput)):
+            patternForRemove = r'^[ -\)\(]$'
+            userInput = re.sub(patternForRemove, '', userInput)
             employee.append(userInput)
             break
 
