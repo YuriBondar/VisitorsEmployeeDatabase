@@ -1,5 +1,19 @@
 
 from checkFunctions import *
+import csv
+
+def fileToDictionary(fileName):
+    employeeDictinary = {}
+    i = 0
+    try:
+        with open(fileName, 'r', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                i = i + 1
+                employeeDictinary[i] = list(row)
+            return employeeDictinary
+    except Exception as e:
+        print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
 
 #----------------------------------------------------------------------
 #Modul für Datenbankfunktionen:
@@ -143,4 +157,13 @@ def fCreateNewVisitor():
             visitor.append(userInput)
             break
     return visitor
+
+def selectData(userChoise):
+    fullDictinary = fileToDictionary("Employees.csv")
+    selectList = []
+    print(f"input {userChoise}")
+    pattern = input()
+    for personNumber in fullDictinary:
+        if pattern == fullDictinary[personNumber][userChoise]:
+            selectList.append(fullDictinary[personNumber])
 

@@ -10,7 +10,7 @@ def fCheckWord(userInput, isPoint):
     if isPoint == True:
         pattern = r'^([a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-\.]*[a-zA-ZüäößÜÄÖß \.])?$'
     else:
-        pattern = r'^[a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-]*[a-zA-ZüäößÜÄÖß ]$'
+        pattern = r'^[a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-]*([a-zA-ZüäößÜÄÖß ])?$'
 
     if re.match(pattern, userInput) is not None:
         return True
@@ -61,9 +61,11 @@ def fChekPhone(userInput):
     pattern = r'^[0-9 -]+$'
     userInput = re.sub( patternForRemove, '', userInput)
 
-    if re.match(pattern, userInput) is None and len(userInput) != 12:
+    if re.match(pattern, userInput) is None or len(userInput) != 11:
         print("Ungültige Telefonnummer")
         return False
+    else:
+        return True
 
 def fCheckInsurance(userInput):
     if len(userInput) != 8:

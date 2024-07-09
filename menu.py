@@ -3,11 +3,12 @@ import os
 from databaseFunctions import *
 
 #-------------------------------------------------------
-def fPrintMenu(menuItems):
+def printMenu(menuItems):
     i = 0
     for menuItem in menuItems:
         i = i + 1
         print(f"{i}. {menuItem}")
+    return i
 #--------------------------------------------------------
 def fAddNewRecord(fileName):
     if not os.path.exists(fileName):
@@ -27,7 +28,40 @@ def fPrintFile(fileName):
                 print(row)
     except Exception as e:
         print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
-def fMenu():
+#----------------------------------------------------------------------
+#-----------------------------------------------------------
+#----------------------------------------------------------------------
+def showEmployee():
+    employeeAtributesList = ["Status",
+        "Nachname",
+        "Vorname",
+        "Geschlecht",
+        "Title",
+        "Sozialversicherungsnummer",
+        "E-Mail",
+        "Telefonnummer",
+        "Ort",
+        "Straße",
+        "Hausnummer",
+        "Geburtsdatum"]
+
+    print("Daten Wählen nach:")
+    lastNumber = printMenu(employeeAtributesList) + 1
+    print(f"{lastNumber}. Die Liste der Mitarbeiter*innen anzeigen")
+    userChoise = int(input())
+    selectData(employeeAtributesList[userChoise])
+
+
+
+
+
+
+
+
+#----------------------------------------------------------------------
+#--------------------main menu-----------------------------------------
+#----------------------------------------------------------------------
+def fMainMenu():
 
     menuItems = ["Neuen Eintrag für Mitarbeiter*innen erstellen",
                  "Neuen Eintrag für Besucher*innen erstellen",
@@ -39,20 +73,21 @@ def fMenu():
     print("Willkommen in der Datenbank!")
     while True:
         print("Wählen die Option:")
-        fPrintMenu(menuItems)
-        status = input()
+        printMenu(menuItems)
+        status = int(input())
 
-        if status == "1":
-            fAddNewRecord("Employees.csv")
-        elif status == "2":
-            fAddNewRecord("Visitors.csv")
-        elif status == "3":
-            fPrintFile('Employees.csv')
-        elif status == "4":
-            fPrintFile('Visitors.csv')
-        elif status == "5":
-            fSelect
-        elif status == "6":
-            break
-        else:
-            print("Geben Sie eine Zahl aus den Menüpunkten")
+        match status:
+            case 1:
+                fAddNewRecord("Employees.csv")
+            case 2:
+                fAddNewRecord("Visitors.csv")
+            case 3:
+                showEmployee()
+            case 4:
+                fPrintFile('Visitors.csv')
+            case 5:
+                fPrintFile('Visitors.csv')
+            case 6:
+                break
+            case _:
+                print("Geben Sie eine Zahl aus den Menüpunkten")
