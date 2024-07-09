@@ -14,20 +14,19 @@ def fAddNewRecord(fileName):
         print("Achtung, die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden. Es wird eine neue Mitarbeiterdatenbank erstellt.")
     with open(fileName, 'a', newline='') as file:
         writer = csv.writer(file)
-        if fileName == "Employees.cvs":
+        if fileName == "Employees.csv":
             writer.writerow(fCreateNewEmployee())
         else:
             writer.writerow(fCreateNewVisitor())
 
 def fPrintFile(fileName):
     try:
-        if os.path.exists(fileName):
-            with open(fileName, 'r', newline='') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    print(row)
+        with open(fileName, 'r', newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                print(row)
     except Exception as e:
-        print("")
+        print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
 def fMenu():
 
     menuItems = ["Neuen Eintrag für Mitarbeiter*innen erstellen",
@@ -43,18 +42,14 @@ def fMenu():
         status = input()
 
         if status == "1":
-            fAddNewRecord("Employees.cvs")
-        if status == "2":
-            fAddNewRecord("Visitors.cvs")
-        if status == "3":
-            with open('Employees.csv', 'r', newline='') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    print(row)
-        if status == "4":
-            with open('Visitors.csv', 'r', newline='') as file:
-                reader = csv.reader(file)
-                for row in reader:
-                    print(row)
-        if status == "5":
+            fAddNewRecord("Employees.csv")
+        elif status == "2":
+            fAddNewRecord("Visitors.csv")
+        elif status == "3":
+            fPrintFile('Employees.csv')
+        elif status == "4":
+            fPrintFile('Visitors.csv')
+        elif status == "5":
             break
+        else:
+            print("Geben Sie eine Zahl aus den Menüpunkten")

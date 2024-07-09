@@ -17,7 +17,8 @@ def fCheckWord(userInput, isPoint):
         mylist = "abcdefghijklmnopqrstuvwxyzöäüß -"
 
     if isEmpty(userInput):
-        return False
+        if isPoint == False:
+            return False
     elif userInput[0] == "-" or userInput[0] == "." or userInput[len(userInput)-1] == "-":
         print("An erster oder letzter Stelle muss ein Buchstabe stehen.")
         return False
