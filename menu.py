@@ -2,13 +2,13 @@ import csv
 import os
 from databaseFunctions import *
 
-
+#-------------------------------------------------------
 def fPrintMenu(menuItems):
     i = 0
     for menuItem in menuItems:
         i = i + 1
         print(f"{i}. {menuItem}")
-
+#--------------------------------------------------------
 def fAddNewRecord(fileName):
     if not os.path.exists(fileName):
         print("Achtung, die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden. Es wird eine neue Mitarbeiterdatenbank erstellt.")
