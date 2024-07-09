@@ -1,6 +1,6 @@
 import csv
 
-from databaseFunctions import *
+
 from menu import *
 
 #----------------------main-----------------------------------------
