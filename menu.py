@@ -3,14 +3,14 @@ import os
 from databaseFunctions import *
 
 #-------------------------------------------------------
-def printMenu(menuItems):
+def printList(listItems):
     i = 0
-    for menuItem in menuItems:
+    for listItem in listItems:
         i = i + 1
-        print(f"{i}. {menuItem}")
+        print(f"{i}. {listItem}")
     return i
 #--------------------------------------------------------
-def fAddNewRecord(fileName):
+def addNewRecord(fileName):
     if not os.path.exists(fileName):
         print("Achtung, die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden. Es wird eine neue Mitarbeiterdatenbank erstellt.")
     with open(fileName, 'a', newline='') as file:
@@ -20,7 +20,7 @@ def fAddNewRecord(fileName):
         else:
             writer.writerow(fCreateNewVisitor())
 
-def fPrintFile(fileName):
+def printFile(fileName):
     try:
         with open(fileName, 'r', newline='') as file:
             reader = csv.reader(file)
@@ -31,7 +31,7 @@ def fPrintFile(fileName):
 #----------------------------------------------------------------------
 #-----------------------------------------------------------
 #----------------------------------------------------------------------
-def showEmployee():
+def selectMenu():
     employeeAtributesList = ["Status",
         "Nachname",
         "Vorname",
@@ -45,48 +45,63 @@ def showEmployee():
         "Hausnummer",
         "Geburtsdatum"]
 
-    print("Daten Wählen nach:")
-    lastNumber = printMenu(employeeAtributesList) + 1
-    print(f"{lastNumber}. Die Liste der Mitarbeiter*innen anzeigen")
-    userChoise = int(input())
-    selectData(employeeAtributesList[userChoise])
-
-
-
-
-
+    while True:
+        print("Wählen Sie aus, nach welchem Attribut Sie Mitarbeiterinformationen auswählen möchten:")
+        printList(employeeAtributesList)
+        lastNumber = len(employeeAtributesList) + 1
+        print(f"{lastNumber}. Vollständige Mitarbeiterdatenbank anzeigen")
+        lastNumber = lastNumber + 1
+        print(f"{lastNumber}. Zurück zum Hauptmenü")
+        userChoise = input()
+        if not userChoise.isnumeric():
+            print("Geben Sie eine Nummer aus der Liste ein")
+            continue
+        else:
+            userChoise = int(userChoise)
+            if userChoise < 1 or userChoise > lastNumber:
+                print("Geben Sie eine Nummer aus der Liste ein")
+                continue
+            elif userChoise == lastNumber:
+                break
+            elif userChoise == lastNumber - 1:
+                printFile("Employees.csv")
+                break
+            else:
+                print("Suchergebnisse:")
+                print(selectEmployee(userChoise, employeeAtributesList[userChoise-1]))
+        print("Eine beliebige Taste drücken")
 
 
 
 #----------------------------------------------------------------------
 #--------------------main menu-----------------------------------------
 #----------------------------------------------------------------------
-def fMainMenu():
+def mainMenu():
 
     menuItems = ["Neuen Eintrag für Mitarbeiter*innen erstellen",
                  "Neuen Eintrag für Besucher*innen erstellen",
-                 "Die Liste der Mitarbeiter*innen anzeigen",
-                 "Die Liste der Besucher*innen anzeigen",
+                 "Mitarbeiterinformationen suchen/anzeigen",
+                 "Besucherinformationen finden/anzeigen",
                  "Die Arbeit mit der Datenbank beenden",
                  "Aus der Datenbank auswählen"]
 
     print("Willkommen in der Datenbank!")
     while True:
         print("Wählen die Option:")
-        printMenu(menuItems)
+        printList(menuItems)
         status = int(input())
 
         match status:
             case 1:
-                fAddNewRecord("Employees.csv")
+                addNewRecord("Employees.csv")
             case 2:
-                fAddNewRecord("Visitors.csv")
+                addNewRecord("Visitors.csv")
             case 3:
-                showEmployee()
+                selectMenu()
             case 4:
-                fPrintFile('Visitors.csv')
+                printFile('Visitors.csv')
             case 5:
-                fPrintFile('Visitors.csv')
+                printFile('Visitors.csv')
             case 6:
                 break
             case _:

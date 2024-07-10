@@ -10,7 +10,7 @@ def fileToDictionary(fileName):
             reader = csv.reader(file)
             for row in reader:
                 i = i + 1
-                employeeDictinary[i] = list(row)
+                employeeDictinary[f"Mitarbeiter {i}"] = list(row)
             return employeeDictinary
     except Exception as e:
         print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
@@ -158,12 +158,14 @@ def fCreateNewVisitor():
             break
     return visitor
 
-def selectData(userChoise):
+def selectEmployee(userChoise, userChoiseString):
     fullDictinary = fileToDictionary("Employees.csv")
-    selectList = []
-    print(f"input {userChoise}")
-    pattern = input()
-    for personNumber in fullDictinary:
-        if pattern == fullDictinary[personNumber][userChoise]:
-            selectList.append(fullDictinary[personNumber])
+    selectDictinary = {}
+    print(f"Geben Sie {userChoiseString} ein, nach dem Sie suchen möchten:")
+    neededAttribute = input()
+    for personNumber, personData in fullDictinary.items():
+       # print(fullDictinary[personNumber][userChoise])
+        if neededAttribute == personData[userChoise-1]:
+            selectDictinary[personNumber] = personData
+    return selectDictinary
 
