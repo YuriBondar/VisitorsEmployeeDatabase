@@ -1,19 +1,8 @@
 
 from checkFunctions import *
+from dataFunctions import *
 import csv
 
-def fileToDictionary(fileName):
-    employeeDictinary = {}
-    i = 0
-    try:
-        with open(fileName, 'r', newline='') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                i = i + 1
-                employeeDictinary[f"Mitarbeiter {i}"] = list(row)
-            return employeeDictinary
-    except Exception as e:
-        print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
 
 #----------------------------------------------------------------------
 #Modul für Datenbankfunktionen:
@@ -158,14 +147,30 @@ def fCreateNewVisitor():
             break
     return visitor
 
-def selectEmployee(userChoise, userChoiseString):
-    fullDictinary = fileToDictionary("Employees.csv")
+def selectRecord(userChoise, userChoiseString, typeOfPerson):
+    if typeOfPerson == "Employee":
+        fullDictinary = fileToDictionary("Employees.csv")
+    else:
+        fullDictinary = fileToDictionary("Visitors.csv")
     selectDictinary = {}
     print(f"Geben Sie {userChoiseString} ein, nach dem Sie suchen möchten:")
     neededAttribute = input()
     for personNumber, personData in fullDictinary.items():
-       # print(fullDictinary[personNumber][userChoise])
         if neededAttribute == personData[userChoise-1]:
             selectDictinary[personNumber] = personData
     return selectDictinary
 
+def identifyOnlyRecord(selectresults, typeOfPerson):
+    if typeOfPerson == "Employee":
+        typeOfPerson = "Mitarbeiter"
+    else:
+        typeOfPerson = "Besucher"
+    print(f"Ihre Suche ergab folgende {typeOfPerson}")
+    print(selectresults)
+    print(f"Wählen Sie die Nummer des {typeOfPerson} aus, um die Daten zu ändern")
+    neededPersonNumber = input(f"{typeOfPerson} ")
+    neededPerson = typeOfPerson + neededPersonNumber
+    return selectresults[neededPerson]
+
+def changeCurrentPerson(selectresults, typeOfPerson):
+    pass
