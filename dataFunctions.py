@@ -3,16 +3,21 @@ import csv
 #---------------------------------------------------
 #--------konvertiert die Datei in Dictionary
 #---------------------------------------------------
-def fileToDictionary(fileName):
-    employeeDictinary = {}
+def fileToDictionary(typeOfPerson):
+    if typeOfPerson == "Employee":
+        fileName = "Employees.csv"
+    else:
+        fileName = "Visitors.csv"
+    fullDictinary = {}
+    typeOfPersonGer = translateTypeOfPerson(typeOfPerson)
     i = 0
     try:
         with open(fileName, 'r', newline='') as file:
             reader = csv.reader(file)
             for row in reader:
                 i = i + 1
-                employeeDictinary[f"Mitarbeiter {i}"] = list(row)
-            return employeeDictinary
+                fullDictinary[f"{typeOfPersonGer} {i}"] = list(row)
+            return fullDictinary
     except Exception as e:
         print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
 #-------------------------------------------------------------------------
@@ -24,21 +29,27 @@ def printList(listItems):
         i = i + 1
         print(f"{i}. {listItem}")
     return i
-#-------------------------------------------------------------------------
-#--------Datai anzeigen
-#-------------------------------------------------------------------------
-def printDatabase(typeOfPerson):
+
+def translateTypeOfPerson(typeOfPerson):
     if typeOfPerson == "Employee":
-        fileName = "Employees.csv"
+        return "Mitarbeiter"
     else:
-        fileName = "Visitors.csv"
-    try:
-        with open(fileName, 'r', newline='') as file:
-            reader = csv.reader(file)
-            for row in reader:
-                print(row)
-    except Exception as e:
-        print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
+        return "Besucher"
+def printDictinary(dictinary, typeOfPerson):
+    typeOfPersonGer = translateTypeOfPerson(typeOfPerson)
+    print("---------------------------------------------------------------------------------------------------------------------")
+    print(f"{typeOfPersonGer}: {chooseAtributesList(typeOfPerson)}")
+    print("----------------------------------------------------------------------------------------------------------------------")
+    for person, value in dictinary.items():
+        print(f"{person} : {value}")
+    print("----------------------------------------------------------------------------------------------------------------------")
+    input("Eine beliebige Taste drücken")
+
+def printFullDatabase(typeOfPerson):
+    database = fileToDictionary(typeOfPerson)
+    printDictinary(database, typeOfPerson)
+
+
 
 def writeToFile(fullDictinary, typeOfPerson):
     if typeOfPerson == "Employee":
@@ -69,7 +80,7 @@ def chooseAtributesList(typeOfPerson):
                             "Hausnummer",
                             "Geburtsdatum"]
 
-    besucherAtributesList = ["Nachname",
+    visitorAtributesList = ["Nachname",
                             "Vorname",
                             "E-Mail",
                             "Telefonnummer",
@@ -79,4 +90,4 @@ def chooseAtributesList(typeOfPerson):
     if typeOfPerson == "Employee":
         return employeeAtributesList
     if typeOfPerson == "Visitor":
-        return besucherAtributesList
+        return visitorAtributesList

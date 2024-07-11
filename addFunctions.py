@@ -93,6 +93,7 @@ def fCreateNewEmployee():
             break
 
     return employee
+
 def fCreateNewVisitor():
     #     Daten für den Mitarbeiter:
     #     Nachname
@@ -141,57 +142,18 @@ def fCreateNewVisitor():
             break
     return visitor
 
-def selectByAttribute(userChoise, neededAttribute, typeOfPerson):
-    atributesList = chooseAtributesList(typeOfPerson)
+def addNewRecordInterface(typeOfPerson):
     if typeOfPerson == "Employee":
-        fullDictinary = fileToDictionary("Employees.csv")
+        fileName = "Employees.csv"
     else:
-        fullDictinary = fileToDictionary("Visitors.csv")
-    selectDictinary = {}
-    for personNumber, personData in fullDictinary.items():
-        if neededAttribute == personData[userChoise-1]:
-            selectDictinary[personNumber] = personData
-    return selectDictinary
-
-def identifyCurrentPerson(selectresults, typeOfPerson):
-    if typeOfPerson == "Employee":
-        typeOfPerson = "Mitarbeiter"
-    else:
-        typeOfPerson = "Besucher"
-    if len(selectresults) > 1:
-        print(f"Ihre Suche ergab folgende {typeOfPerson}")
-        print(selectresults)
-        print(f"Wählen Sie die Nummer des {typeOfPerson} aus, um die Daten zu ändern")
-        neededPersonNumber = input(f"{typeOfPerson} ")
-        neededPerson = typeOfPerson + neededPersonNumber
-        return selectresults[neededPerson]
-    else:
-        return selectresults
-
-def changeCurrentPerson(currentPerson, typeOfPerson):
-    atributesList = chooseAtributesList(typeOfPerson)
-    if typeOfPerson == "Employee":
-        fullDictinary = fileToDictionary("Employees.csv")
-    else:
-        fullDictinary = fileToDictionary("Visitors.csv")
-
-    while True:
-        print(f"Wählen Sie aus, nach welchem Attribut Sie {typeOfPerson}informationen ändern möchten:")
-        printList(atributesList)
-        attributeToChange = input("Ihre Auswahl:")
-        newData = None
-        while True:
-            newData = input(f"Inpute new {atributesList[attributeToChange-1]}:")
-            if checkData(attributeToChange, newData, typeOfPerson):
-                break
-        key = list(currentPerson.keys())[0]
-        currentPerson[key][attributeToChange-1] = newData
-
-        fullDictinary[key] = currentPerson.get(key)
-        writeToFile(fullDictinary,typeOfPerson)
-        print(f"Do you want to change another attribute for this person? (y/n)")
-        userchoice = input("Ihre Auswahl: ")
-        if userchoice == "n":
-            break
+        fileName = "Visitors.csv"
+    if not os.path.exists(fileName):
+        print(f"Achtung, die Datenbank mit {typeOfPerson} wurde nicht gefunden. Es wird eine neue Mitarbeiterdatenbank erstellt.")
+    with open(fileName, 'a', newline='') as file:
+        writer = csv.writer(file)
+        if fileName == "Employees.csv":
+            writer.writerow(fCreateNewEmployee())
+        else:
+            writer.writerow(fCreateNewVisitor())
 
 

@@ -119,9 +119,9 @@ def checkData (userChoice, newData, typeOfPerson):
 
     if typeOfPerson == "Employee":
         match int(userChoice):
-            case 1,2,8:
+            case 1 | 2 | 8:
                 return checkWord(newData,False)
-            case 3,9:
+            case 3 | 9:
                 return checkGeschlecht(newData)
             case 4:
                 return checkWord(newData,True)
@@ -139,7 +139,7 @@ def checkData (userChoice, newData, typeOfPerson):
                 return False
     elif typeOfPerson == "Visitor":
         match int(userChoice):
-            case 1,2,5:
+            case 1 | 2 | 5:
                 return checkWord(newData,False)
             case 3:
                 return checkEmail(newData)
