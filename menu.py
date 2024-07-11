@@ -86,7 +86,9 @@ def mainMenu():
                  "Besucherinformationen ändern",
                  "Aus der Datenbank auswählen"]
 
+    print(f"-------------------------------------------------------")
     print("Willkommen in der Datenbank!")
+    print(f"-------------------------------------------------------")
     while True:
         print("Wählen die Option:")
         printList(menuItems)
