@@ -6,7 +6,7 @@ import re
 #Modul für Datenprüfungsfunktionen
 #-----------------------------------------------------------------------
 
-def fCheckWord(userInput, isPoint):
+def checkWord(userInput, isPoint):
     if isPoint == True:
         pattern = r'^([a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-\.]*[a-zA-ZüäößÜÄÖß \.])?$'
     else:
@@ -26,14 +26,14 @@ def fCheckWord(userInput, isPoint):
                   "An der letzten Position darf kein Bindestrich stehen ")
             return False
 
-def fCheckGeschlecht(userInput):
+def checkGeschlecht(userInput):
     if userInput == "m" or userInput == "w":
         return True
     else:
         print("Geben Sie nur 'm' oder 'w' ein.")
         return False
 
-def fCheckEmail(userInput):
+def checkEmail(userInput):
     pattern = r'^[\wÜÄÖß\+\.-]+@[\wÜÄÖß\+-]+\.[\wÜÄÖß\+-\.]+$'
     errorMassage = "Ungültige Email"
 
@@ -56,7 +56,7 @@ def fCheckEmail(userInput):
                     return False
     return True
 
-def fChekPhone(userInput):
+def chekPhone(userInput):
     patternForRemove = r'^[ -\)\(]$'
     pattern = r'^[0-9 -]+$'
     userInput = re.sub( patternForRemove, '', userInput)
@@ -67,7 +67,7 @@ def fChekPhone(userInput):
     else:
         return True
 
-def fCheckInsurance(userInput):
+def checkInsurance(userInput):
     if len(userInput) != 8:
         print("Die Sozialversicherungsnummer muss aus 8 Zahlen bestehen")
         return False
@@ -76,7 +76,7 @@ def fCheckInsurance(userInput):
     else:
         return False
 
-def fCheckHaus(userInput):
+def checkHaus(userInput):
     mylist = "abcdefghijklmnopqrstuvwxyz0123456789-/"
     if not userInput[0].isnumeric():
         print("An erster Stelle muss ein Zahl stehen.")
@@ -89,7 +89,7 @@ def fCheckHaus(userInput):
             return False
 
 
-def fCheckDate(userInput):
+def checkDate(userInput):
     if userInput[2] != "." and userInput[5] != ".":
         print("Incorrect Date. Format: dd.mm.yyyy")
         return False
@@ -114,3 +114,40 @@ def checkUserChoiseInMenu(userChoise, lastNumber):
             return False
         else:
             return True
+
+def checkData (userChoice, newData, typeOfPerson):
+
+    if typeOfPerson == "Employee":
+        match int(userChoice):
+            case 1,2,8:
+                return checkWord(newData,False)
+            case 3,9:
+                return checkGeschlecht(newData)
+            case 4:
+                return checkWord(newData,True)
+            case 5:
+                return checkInsurance(newData)
+            case 6:
+                return checkEmail(newData)
+            case 7:
+                return chekPhone(newData)
+            case 10:
+                return checkHaus(newData)
+            case 11:
+                return checkDate(newData)
+            case _:
+                return False
+    elif typeOfPerson == "Visitor":
+        match int(userChoice):
+            case 1,2,5:
+                return checkWord(newData,False)
+            case 3:
+                return checkEmail(newData)
+            case 4:
+                return chekPhone(newData)
+            case 6:
+                return checkDate(newData)
+            case _:
+                return False
+
+

@@ -4,7 +4,7 @@ from databaseFunctions import *
 from dataFunctions import *
 
 #--------------------------------------------------------
-def menuAddNewRecord(typeOfPerson):
+def addNewRecordInterface(typeOfPerson):
     if typeOfPerson == "Employee":
         fileName = "Employees.csv"
     else:
@@ -22,22 +22,25 @@ def menuAddNewRecord(typeOfPerson):
 #----------------------------------------------------------------------
 #----------------select menu-------------------------------------------
 #----------------------------------------------------------------------
-def menuSelect(typeOfPerson, isCorrection):
+def selectRecordsInterface(typeOfPerson, isCorrection):
 
     atributesList = chooseAtributesList(typeOfPerson)
 
     while True:
-        print("Wählen Sie aus, nach welchem Attribut Sie Mitarbeiterinformationen auswählen möchten:")
+        print(f"Wählen Sie aus, nach welchem Attribut Sie {typeOfPerson}informationen auswählen möchten:")
         printList(atributesList)
         print(f"{len(atributesList) + 1}. Zurück zum Hauptmenü")
 
         userChoise = input("Ihre Auswahl:")
+
         if not checkUserChoiseInMenu(userChoise, len(atributesList) + 1):
             continue
         elif userChoise == (len(atributesList) + 1):
             break
         else:
-            resultSelection = selectRecord(userChoise, atributesList[userChoise-1], typeOfPerson)
+            print(f"Geben Sie {atributesList[userChoise - 1]} ein, nach dem Sie suchen möchten:")
+            neededAttribute = input()
+            resultSelection = selectByAttribute(userChoise, neededAttribute, typeOfPerson)
             if isCorrection == True:
                 return resultSelection
             elif resultSelection == {}:
@@ -47,20 +50,24 @@ def menuSelect(typeOfPerson, isCorrection):
     input("Eine beliebige Taste drücken")
 
 
-def menuChange(typeOfPerson):
+def changeRecordsInterface(typeOfPerson):
 
+
+    print(f"-------------------------------------------------------")
+    print(f" Menu Korrekturen")
+    print(f"-------------------------------------------------------")
     print(f" 1.Suchen Sie den {typeOfPerson}, dessen Daten Sie korrigieren möchten")
     print(f" 2.Geben Sie den Nachnamen des {typeOfPerson}s ein")
     userChoise = input()
     if userChoise == 1:
-        selectresults = menuSelect(typeOfPerson, True)
+        selectresults = selectRecordsInterface(typeOfPerson, True)
     elif userChoise == 2:
-        selectresults = selectRecord(2, userChoise, typeOfPerson)
-
-    if len(selectresults) > 1:
-        selectresults = identifyOnlyRecord(selectresults, typeOfPerson)
-
-    changeCurrentPerson(selectresults, typeOfPerson)
+        neededAtribute = input("Nachname: ")
+        selectresults = selectByAttribute(2, neededAtribute, typeOfPerson)
+        currentPerson = identifyCurrentPerson(selectresults, typeOfPerson)
+        changeCurrentPerson(currentPerson, typeOfPerson)
+    elif userChoise == 3:
+        return
 
 
 
@@ -87,21 +94,21 @@ def mainMenu():
 
         match status:
             case 1:
-                menuAddNewRecord("Employee")
+                addNewRecordInterface("Employee")
             case 2:
-                menuAddNewRecord("Visitor")
+                addNewRecordInterface("Visitor")
             case 3:
-                menuSelect("Employee", False)
+                selectRecordsInterface("Employee", False)
             case 4:
-                menuSelect("Visitor", False)
+                selectRecordsInterface("Visitor", False)
             case 5:
                 printDatabase("Employee")
             case 6:
                 printDatabase("Visitor")
             case 7:
-                menuChange("Employee")
+                changeRecordsInterface("Employee")
             case 8:
-                menuChange("Visitor")
+                changeRecordsInterface("Visitor")
             case 7:
                 break
             case _:

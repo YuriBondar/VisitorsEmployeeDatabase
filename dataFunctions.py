@@ -40,11 +40,24 @@ def printDatabase(typeOfPerson):
     except Exception as e:
         print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
 
+def writeToFile(fullDictinary, typeOfPerson):
+    if typeOfPerson == "Employee":
+        fileName = "Employees.csv"
+    else:
+        fileName = "Visitors.csv"
+    try:
+        with open(fileName, 'w', newline='') as file:
+            writer = csv.writer(file)
+            for person in fullDictinary:
+                writer.writerow(fullDictinary[person])
+    except Exception as e:
+        print("Die Datenbank mit Ihren Mitarbeitern wurde nicht gefunden")
+
 #---------------------------------------------------------------------------
 
-def chooseAtributesList(status):
-    employeeAtributesList = ["Status",
-                            "Nachname",
+def chooseAtributesList(typeOfPerson):
+
+    employeeAtributesList = ["Nachname",
                             "Vorname",
                             "Geschlecht",
                             "Title",
@@ -56,16 +69,14 @@ def chooseAtributesList(status):
                             "Hausnummer",
                             "Geburtsdatum"]
 
-
-    besucherAtributesList = ["Status",
-                            "Nachname",
+    besucherAtributesList = ["Nachname",
                             "Vorname",
                             "E-Mail",
                             "Telefonnummer",
                             "Verantwortlicher Manager",
                             "Tag und Zeit des Besuchs"]
 
-    if status == "Employee":
+    if typeOfPerson == "Employee":
         return employeeAtributesList
-    if status == "Visitor":
+    if typeOfPerson == "Visitor":
         return besucherAtributesList
