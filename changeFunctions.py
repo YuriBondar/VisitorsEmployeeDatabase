@@ -9,8 +9,8 @@ def ChooseOnePerson(selectresults, typeOfPerson):
         print(f"Ihre Suche ergab folgende {typeOfPersonGer}")
         printDictinary(selectresults, typeOfPerson)
         print(f"Wählen Sie die Nummer des {typeOfPersonGer} aus, um die Daten zu ändern")
-        neededPersonNumber = input(f"{typeOfPerson} ")
-        neededPerson = typeOfPerson + " " + neededPersonNumber
+        neededPersonNumber = input(f"{typeOfPersonGer} ")
+        neededPerson = typeOfPersonGer + " " + neededPersonNumber
         return {neededPerson: selectresults[neededPerson]}
     else:
         return selectresults

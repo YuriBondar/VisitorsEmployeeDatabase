@@ -11,7 +11,7 @@ def selectByAttribute(userChoise, neededAttribute, typeOfPerson):
         fullDictinary = fileToDictionary("Visitor")
     selectDictinary = {}
     for personNumber, personData in fullDictinary.items():
-        if neededAttribute == personData[int(userChoise)-1]:
+        if neededAttribute in personData[int(userChoise)-1]:
             selectDictinary[personNumber] = personData
     return selectDictinary
 def selectRecordsInterface(typeOfPerson, isCorrection):

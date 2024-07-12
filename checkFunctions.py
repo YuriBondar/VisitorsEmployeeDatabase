@@ -68,14 +68,17 @@ def chekPhone(userInput):
         return True
 
 def checkInsurance(userInput):
-    if len(userInput) != 8:
-        print("Die Sozialversicherungsnummer muss aus 8 Zahlen bestehen")
+    if len(userInput) != 10:
+        print("Die Sozialversicherungsnummer muss aus 10 Zahlen bestehen")
         return False
     elif userInput.isnumeric():
         return True
     else:
         return False
 
+def checkSrteetHouse(userInput):
+    pattern = r'^[a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-\.]+[0-9]+([a-zA-ZüäößÜÄÖß \-\.\\])?$'
+    pass
 def checkHaus(userInput):
     mylist = "abcdefghijklmnopqrstuvwxyz0123456789-/"
     if not userInput[0].isnumeric():
