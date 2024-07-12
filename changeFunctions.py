@@ -3,15 +3,12 @@ from dataFunctions import *
 from selectFunctions import *
 
 
-def identifyCurrentPerson(selectresults, typeOfPerson):
-    if typeOfPerson == "Employee":
-        typeOfPerson = "Mitarbeiter"
-    else:
-        typeOfPerson = "Besucher"
+def ChooseOnePerson(selectresults, typeOfPerson):
+    typeOfPersonGer = translateTypeOfPerson(typeOfPerson)
     if len(selectresults) > 1:
-        print(f"Ihre Suche ergab folgende {typeOfPerson}")
-        print(selectresults)
-        print(f"Wählen Sie die Nummer des {typeOfPerson} aus, um die Daten zu ändern")
+        print(f"Ihre Suche ergab folgende {typeOfPersonGer}")
+        printDictinary(selectresults, typeOfPerson)
+        print(f"Wählen Sie die Nummer des {typeOfPersonGer} aus, um die Daten zu ändern")
         neededPersonNumber = input(f"{typeOfPerson} ")
         neededPerson = typeOfPerson + " " + neededPersonNumber
         return {neededPerson: selectresults[neededPerson]}
@@ -48,6 +45,7 @@ def changeRecordsInterface(typeOfPerson):
 
     while True:
         print(f"-------------------------------------------------------")
+        print(f"-------------------------------------------------------")
         print(f" Menu Korrekturen")
         print(f"-------------------------------------------------------")
         print(f" 1.Suchen Sie den {typeOfPerson}, dessen Daten Sie korrigieren möchten")
@@ -62,7 +60,7 @@ def changeRecordsInterface(typeOfPerson):
             selectresults = selectRecordsInterface(typeOfPerson, True)
         elif int(userChoise) == 2:
             neededAtribute = input("Nachname: ")
-            selectresults = selectByAttribute(2, neededAtribute, typeOfPerson)
+            selectresults = selectByAttribute(1, neededAtribute, typeOfPerson)
 
-        currentPerson = identifyCurrentPerson(selectresults, typeOfPerson)
+        currentPerson = ChooseOnePerson(selectresults, typeOfPerson)
         changeCurrentPerson(currentPerson, typeOfPerson)

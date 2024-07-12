@@ -1,9 +1,7 @@
 
 from checkFunctions import *
-from dataFunctions import *
 import csv
-
-
+import os
 #----------------------------------------------------------------------
 #Modul für Datenbankfunktionen:
 # 1.Hinzufügen eines Mitarbeiters

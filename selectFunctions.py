@@ -21,6 +21,7 @@ def selectRecordsInterface(typeOfPerson, isCorrection):
 
     while True:
         print(f"-------------------------------------------------------")
+        print(f"-------------------------------------------------------")
         print(f"Filtermunü")
         print(f"-------------------------------------------------------")
         print(f"Wählen Sie aus, nach welchem Attribut Sie {typeOfPersonGer}informationen auswählen möchten:")
