@@ -36,7 +36,7 @@ def changeCurrentPerson(currentPerson, typeOfPerson):
 
         fullDictinary[key] = currentPerson.get(key)
         writeToFile(fullDictinary,typeOfPerson)
-        print(f"Do you want to change another attribute for this person? (y/n)")
+        print(f"Möchten Sie weitere Daten für diese Person ändern? (j/n)")
         userchoice = input("Ihre Auswahl: ")
         if userchoice == "n":
             break

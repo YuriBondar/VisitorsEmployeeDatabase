@@ -57,15 +57,15 @@ def checkEmail(userInput):
     return True
 
 def chekPhone(userInput):
-    patternForRemove = r'^[ -\)\(]$'
-    pattern = r'^[0-9 -]+$'
-    userInput = re.sub( patternForRemove, '', userInput)
+    patternForRemove = r'[ -\)\(]'
+    pattern = r'^[0-9]{11}+$'
+    userInput = re.sub(patternForRemove, '', userInput)
 
-    if re.match(pattern, userInput) is None or len(userInput) != 11:
+    if re.match(pattern, userInput) is False:
         print("Ungültige Telefonnummer")
         return False
     else:
-        return True
+        return userInput
 
 def checkInsurance(userInput):
     if len(userInput) != 10:
@@ -114,6 +114,7 @@ def checkUserChoiseInMenu(userChoise, lastNumber):
         userChoise = int(userChoise)
         if userChoise < 1 or userChoise > lastNumber:
             print("Geben Sie eine Nummer aus der Liste ein")
+            input("Eine beliebige Taste drücken")
             return False
         else:
             return True
