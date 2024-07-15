@@ -1,31 +1,25 @@
 
 from changeFunctions import *
+from mainmenuGUI import mainmenuGUI
 from selectFunctions import *
+
 #----------------------------------------------------------------------
 #--------------------  main menu-----------------------------------------
 #----------------------------------------------------------------------
 def mainMenu():
 
-    menuItems = ["Neuen Eintrag für Mitarbeiter*innen erstellen",
-                 "Neuen Eintrag für Besucher*innen erstellen",
-                 "Mitarbeiterinformationen suchen/anzeigen",
-                 "Vollständige Mitarbeiterdatenbank anzeigen",
-                 "Besucherinformationen suchen/anzeigen",
-                 "Vollständige Besucherdatenbank anzeigen",
-                 "Mitarbeiterinformationen ändern",
-                 "Besucherinformationen ändern",
-                 "Geburtstage der Mitarbeiter für diesen Monat anzeigen",
-                 "Das Programm beenden"]
-
     while True:
+
+        mainmenuGUI()
+
         print(f"-------------------------------------------------------")
         print(f"-------------------------------------------------------")
         print("Willkommen in der Datenbank!")
         print(f"-------------------------------------------------------")
         print("Wählen die Option:")
-        printList(menuItems)
+        printList(getMainMenuItems())
         userChoice = input("Ihre Auswahl:")
-        if not checkUserChoiseInMenu(userChoice, len(menuItems)-1):
+        if not checkUserChoiseInMenu(userChoice, len(getMainMenuItems())-1):
             continue
         else:
             userChoice = int(userChoice)

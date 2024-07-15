@@ -57,6 +57,19 @@ def chooseAtributesList(typeOfPerson):
     if typeOfPerson == "Visitor":
         return visitorAtributesList
 
+def getMainMenuItems():
+    menuItems = ["Neuen Eintrag für Mitarbeiter*innen erstellen",
+                 "Neuen Eintrag für Besucher*innen erstellen",
+                 "Mitarbeiterinformationen suchen/anzeigen",
+                 "Vollständige Mitarbeiterdatenbank anzeigen",
+                 "Besucherinformationen suchen/anzeigen",
+                 "Vollständige Besucherdatenbank anzeigen",
+                 "Mitarbeiterinformationen ändern",
+                 "Besucherinformationen ändern",
+                 "Geburtstage der Mitarbeiter für diesen Monat anzeigen",
+                 "Das Programm beenden"]
+    return menuItems
+
 def printBirthdaysEmployee():
     currentMonth = datetime.now().month
     database = fileToDictionary("Employee")
