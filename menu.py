@@ -14,6 +14,7 @@ def mainMenu():
                  "Vollständige Besucherdatenbank anzeigen",
                  "Mitarbeiterinformationen ändern",
                  "Besucherinformationen ändern",
+                 "Geburtstage der Mitarbeiter für diesen Monat anzeigen",
                  "Das Programm beenden"]
 
     while True:
@@ -45,7 +46,9 @@ def mainMenu():
                     changeRecordsInterface("Employee")
                 case 8:
                     changeRecordsInterface("Visitor")
-                case 7:
+                case 9:
+                    printBirthdaysEmployee()
+                case 10:
                     break
                 case _:
                     print("Geben Sie eine Zahl aus den Menüpunkten")

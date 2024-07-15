@@ -1,5 +1,5 @@
 
-import datetime
+from datetime import datetime
 import re
 
 #----------------------------------------------------------------------
@@ -93,18 +93,16 @@ def checkHaus(userInput):
 
 
 def checkDate(userInput):
-    if userInput[2] != "." and userInput[5] != ".":
-        print("Incorrect Date. Format: dd.mm.yyyy")
-        return False
-    else:
-        try:
-            dataList = userInput.rsplit(".")
-            startDay = datetime.datetime(int(dataList[2]), int(dataList[1]), int(dataList[0]))
-            if startDay <= datetime.datetime.now():
-                return True
-        except ValueError:
-            print(f"Incorrect Date. Format: dd.mm.yyyy")
+    try:
+        startDay = datetime.strptime(userInput, "%d.%m.%Y")
+        if startDay <= datetime.now():
+            return True
+        else:
+            print("das Datum ist noch nicht gekommen")
             return False
+    except ValueError:
+        print(f"Incorrect Date. Format: dd.mm.yyyy")
+        return False
 
 def checkData (userChoice, newData, typeOfPerson):
 

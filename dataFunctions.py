@@ -1,5 +1,6 @@
 import csv
 import os
+from datetime import datetime
 #-------------------------------------------------------------------------
 #--------List mit Nummern ab 1 anzeigen, um verschiedene Menüs anzuzeigen
 #-------------------------------------------------------------------------
@@ -55,6 +56,28 @@ def chooseAtributesList(typeOfPerson):
         return employeeAtributesList
     if typeOfPerson == "Visitor":
         return visitorAtributesList
+
+def printBirthdaysEmployee():
+    currentMonth = datetime.now().month
+    database = fileToDictionary("Employee")
+
+    print(f"-------------------------------------------------------")
+    print(f"-------------------------------------------------------")
+    print(f"Geburtstage von Mitarbeitern:")
+
+    for person, value in database.items():
+        birthdayDate = datetime.strptime(value[10], "%d.%m.%Y")
+        if currentMonth == birthdayDate.month:
+            differenceDays = datetime.now().day - birthdayDate.day
+            if differenceDays > 0:
+                birthdayString = "Es sind" + str(differenceDays) + " Tage seit dem Geburtstag vergangen"
+            elif differenceDays < 0:
+                birthdayString = str(abs(differenceDays)) + " Tage bis zum Geburtstag"
+            else:
+                birthdayString = "Der Geburstag ist heute"
+            print(f"{value[0]} {value[1]} - {birthdayString}")
+    input("Eine beliebige Taste drücken")
+
 
 #-------------------------------------------------------------------------------
 #------------------Funktionen für die Arbeit mit Dataien------------------------
