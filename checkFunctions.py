@@ -106,19 +106,6 @@ def checkDate(userInput):
             print(f"Incorrect Date. Format: dd.mm.yyyy")
             return False
 
-def checkUserChoiseInMenu(userChoise, lastNumber):
-    if not userChoise.isnumeric():
-        print("Geben Sie eine Nummer aus der Liste ein")
-        return False
-    else:
-        userChoise = int(userChoise)
-        if userChoise < 1 or userChoise > lastNumber:
-            print("Geben Sie eine Nummer aus der Liste ein")
-            input("Eine beliebige Taste drücken")
-            return False
-        else:
-            return True
-
 def checkData (userChoice, newData, typeOfPerson):
 
     if typeOfPerson == "Employee":
@@ -155,3 +142,15 @@ def checkData (userChoice, newData, typeOfPerson):
                 return False
 
 
+def checkUserChoiseInMenu(userChoise, lastNumber):
+    if not userChoise.isnumeric():
+        print("Geben Sie eine Nummer aus der Liste ein")
+        return False
+    else:
+        userChoise = int(userChoise)
+        if userChoise < 1 or userChoise > lastNumber:
+            print("Geben Sie eine Nummer aus der Liste ein")
+            input("Eine beliebige Taste drücken")
+            return False
+        else:
+            return True

@@ -45,6 +45,6 @@ def selectRecordsInterface(typeOfPerson, isCorrection):
             else:
                 print(f"Suchergebnisse:")
                 printDictinary(resultSelection,typeOfPerson)
-        userChoise = input(f"Möchten Sie weitere Informationen auswählen über {typeOfPerson} (y/n)")
+        userChoise = input(f"Möchten Sie weitere Informationen auswählen über {typeOfPerson} (j/n)")
         if userChoise == "n":
             return

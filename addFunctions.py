@@ -2,6 +2,9 @@
 from checkFunctions import *
 import csv
 import os
+from dataFunctions import addRecordtoFile
+
+
 #----------------------------------------------------------------------
 #Modul für Datenbankfunktionen:
 # 1.Hinzufügen eines Mitarbeiters
@@ -59,7 +62,8 @@ def fCreateNewEmployee():
             break
 
     while True:
-        userInput = input("Telefonnummer: +43 ")
+        print("Telefonnummer (Format:(xxx) xxx xx xxx):")
+        userInput = input("+43 ")
         if (chekPhone(userInput) != False):
             employee.append(userInput)
             break
@@ -140,16 +144,11 @@ def fCreateNewVisitor():
 
 def addNewRecordInterface(typeOfPerson):
     if typeOfPerson == "Employee":
-        fileName = "Employees.csv"
+        newRecord = fCreateNewEmployee()
     else:
-        fileName = "Visitors.csv"
-    if not os.path.exists(fileName):
-        print(f"Achtung, die Datenbank mit {typeOfPerson} wurde nicht gefunden. Es wird eine neue Mitarbeiterdatenbank erstellt.")
-    with open(fileName, 'a', newline='') as file:
-        writer = csv.writer(file)
-        if fileName == "Employees.csv":
-            writer.writerow(fCreateNewEmployee())
-        else:
-            writer.writerow(fCreateNewVisitor())
+        newRecord = fCreateNewVisitor()
+    addRecordtoFile(newRecord, typeOfPerson)
+    print("Die neuen Daten wurden gespeichert")
+    input("Eine beliebige Taste Drucken")
 
 

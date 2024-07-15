@@ -3,7 +3,7 @@ from dataFunctions import *
 from selectFunctions import *
 
 
-def ChooseOnePerson(selectresults, typeOfPerson):
+def reduceToOnePerson(selectresults, typeOfPerson):
     typeOfPersonGer = translateTypeOfPerson(typeOfPerson)
     if len(selectresults) > 1:
         print(f"Ihre Suche ergab folgende {typeOfPersonGer}")
@@ -35,7 +35,7 @@ def changeCurrentPerson(currentPerson, typeOfPerson):
         currentPerson[key][int(attributeToChange)-1] = newData
 
         fullDictinary[key] = currentPerson.get(key)
-        writeToFile(fullDictinary,typeOfPerson)
+        writeDictionaryToFile(fullDictinary,typeOfPerson)
         print(f"Möchten Sie weitere Daten für diese Person ändern? (j/n)")
         userchoice = input("Ihre Auswahl: ")
         if userchoice == "n":
@@ -62,5 +62,5 @@ def changeRecordsInterface(typeOfPerson):
             neededAtribute = input("Nachname: ")
             selectresults = selectByAttribute(1, neededAtribute, typeOfPerson)
 
-        currentPerson = ChooseOnePerson(selectresults, typeOfPerson)
+        currentPerson = reduceToOnePerson(selectresults, typeOfPerson)
         changeCurrentPerson(currentPerson, typeOfPerson)
