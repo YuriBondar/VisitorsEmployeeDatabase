@@ -97,8 +97,8 @@ def checkDate(userInput):
         print("Incorrect Date. Format: dd.mm.yyyy")
         return False
     else:
-        dataList = userInput.rsplit(".")
         try:
+            dataList = userInput.rsplit(".")
             startDay = datetime.datetime(int(dataList[2]), int(dataList[1]), int(dataList[0]))
             if startDay <= datetime.datetime.now():
                 return True

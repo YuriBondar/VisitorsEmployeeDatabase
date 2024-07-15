@@ -1,9 +1,13 @@
 
 from checkFunctions import *
-import csv
-import os
 from dataFunctions import addRecordtoFile
+from datetime import datetime
 
+
+def addAge(birthdayDate):
+    dataList = birthdayDate.rsplit(".")
+    startDay = datetime.datetime(int(dataList[2]), int(dataList[1]), int(dataList[0]))
+    pass
 
 #----------------------------------------------------------------------
 #Modul für Datenbankfunktionen:
@@ -90,6 +94,7 @@ def fCreateNewEmployee():
         userInput = input("Geburtsdatum (format: dd.mm.yyyy):")
         if (checkDate(userInput)):
             employee.append(userInput)
+            # employee.append(addAge(userInput))
             break
 
     return employee
