@@ -3,6 +3,7 @@ import tk
 from checkFunctions import *
 from dataFunctions import *
 from mainmenuGUI import *
+from functionsGUI import *
 
 
 def delEntries(entries):

@@ -1,7 +1,9 @@
 import csv
 
 
-from menu import *
+
+
+from mainmenuGUI import mainmenuGUI
 
 #----------------------main----------------------------------------
 
