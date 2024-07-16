@@ -11,6 +11,16 @@ def firstLabelInFrame(window, text):
     label = tk.Label(frame1, text=text, bg="light gray")
     label.pack(pady=10, expand=True)
 
+def backToMainMenu(window):
+    window.destroy()
+    mainmenuGUI()
+#-----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------
+#------------------------entry menu-------------------------------------------------
+def delEntries(entries):
+    for entry in entries:
+        entry.delete(0,tk.END)
+
 def entryPerson(entries, typeOfPerson):
     atributesList = chooseAtributesList(typeOfPerson)
     newPerson = []
@@ -25,8 +35,7 @@ def entryPerson(entries, typeOfPerson):
 
     addRecordtoFile(newPerson, typeOfPerson)
     messagebox.showinfo("Dates are saved succesful",)
-    for entry in entries:
-        entry.delete(0,tk.END)
+    delEntries(entries)
 
 def addNewRecordGUI(windowMain, typeOfPerson):
     atributesList = chooseAtributesList(typeOfPerson)
@@ -53,17 +62,40 @@ def addNewRecordGUI(windowMain, typeOfPerson):
 # ----------------------------------------------------------------------------------------------------------
     frame3 = tk.Frame(windowAdd, relief="raised", borderwidth=4)
     frame3.grid(row=2, column=0, padx=10, pady=10, sticky="ew")
+    frame3.grid_columnconfigure(0, weight=1)
+    frame3.grid_rowconfigure(0, weight=1)
+    frame3.grid_rowconfigure(1, weight=1)
+    frame3.grid_columnconfigure(1, weight=1)
 
-    button = tk.Button(frame3, text="Daten Speichern", command=lambda: entryPerson(entries,typeOfPerson))
-    button.pack()
+
+    buttonSave = tk.Button(frame3, text="Daten Speichern", command=lambda: entryPerson(entries,typeOfPerson))
+    buttonSave.grid(row=0, column=0, padx=15, pady=10, sticky="ew")
+
+    buttonMainMenu = tk.Button(frame3, text="Back to Main Menu", command=lambda: backToMainMenu(windowAdd))
+    buttonMainMenu.grid(row=0, column=1, padx=15, pady=10, sticky="ew")
+
+    buttonDelete = tk.Button(frame3, text="delete Dates", command=lambda: delEntries(entries))
+    buttonDelete.grid(row=1, column=1, padx=15, pady=10, sticky="ew")
 
     windowAdd.mainloop()
 
-def selectRecordsGUI(typeOfPerson):
+def selectRecordsGUI(windowMain, typeOfPerson):
     pass
 
-def printFullDatabaseGUI(typeOfPerson):
+#-----------------------------------------------------------------------------------
+#-----------------------------------------------------------------------------------
+#------------------------print menu-------------------------------------------------
+def printFullDatabaseGUI(windowMain,typeOfPerson):
+    atributesList = chooseAtributesList(typeOfPerson)
+    windowPrint = tk.Tk()
+    windowMain.destroy()
+    windowPrint .grid_columnconfigure(0, weight=1)
+    windowPrint .grid_rowconfigure(0, weight=1)
+    windowPrint .grid_rowconfigure(1, weight=1)
     pass
+
+
+
 def changeRecordsGUI(typeOfPerson):
     pass
 
@@ -72,13 +104,14 @@ def printBirthdaysEmployeeGUI():
 
 def closeDatabase():
     pass
-
-
+#-----------------------------------------------------------------------------------------------
+#------------------------------------------------------------------------------------------------
+#---------------------------------------main menu------------------------------------------------
 def getMainMenuButtons(menuItems, windowMain):
     mainMenuButtons = [[menuItems[0],lambda: addNewRecordGUI(windowMain, "Employee")],
-                       [menuItems[1],lambda: addNewRecordGUI("Visitor")],
-                       [menuItems[2],lambda: selectRecordsGUI("Employee")],
-                       [menuItems[3],lambda: printFullDatabaseGUI("Employee")],
+                       [menuItems[1],lambda: addNewRecordGUI(windowMain,"Visitor")],
+                       [menuItems[2],lambda: selectRecordsGUI(windowMain, "Employee")],
+                       [menuItems[3],lambda: printFullDatabaseGUI(windowMain,"Employee")],
                        [menuItems[4],lambda: selectRecordsGUI("Visitor")],
                        [menuItems[5],lambda: printFullDatabaseGUI("Employee")],
                        [menuItems[6],lambda: changeRecordsGUI("Employee")],
@@ -94,7 +127,7 @@ def mainmenuGUI():
     windowMain.grid_columnconfigure(0, weight=1)
     windowMain.grid_rowconfigure(0, weight=1)
     windowMain.grid_rowconfigure(1, weight=1)
-
+# -----------------frame with first label
     firstLabelInFrame(windowMain,"Willkommen in der Datenbank!")
 
 #-----------------frame with buttons
