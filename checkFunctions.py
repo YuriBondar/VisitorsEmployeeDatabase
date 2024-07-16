@@ -16,22 +16,21 @@ def checkWord(userInput, isPoint):
         return True
     else:
         if isPoint == True:
-            print("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.\n"
-                  "Das Feld darf nicht leer sein.\n"
-                  " An der ersten und letzten Position darf kein Bindestrich stehen.")
-            return False
+            errorString = "Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.\n Das Feld darf nicht leer sein.\nAn der ersten und letzten Position darf kein Bindestrich stehen."
+            print(errorString)
+            return errorString
         else:
-            print("Geben Sie nur Buchstaben, Leerzeichen, oder das Zeichen '-' ein.\n"
-                  "An der ersten Position darf kein Bindestrich und Punkt stehen\n"
-                  "An der letzten Position darf kein Bindestrich stehen ")
-            return False
+            errorString = "Geben Sie nur Buchstaben, Leerzeichen, oder das Zeichen '-' ein.\nAn der ersten Position darf kein Bindestrich und Punkt stehen\nAn der letzten Position darf kein Bindestrich stehen "
+            print(errorString)
+            return errorString
 
 def checkGeschlecht(userInput):
     if userInput == "m" or userInput == "w":
         return True
     else:
-        print("Geben Sie nur 'm' oder 'w' ein.")
-        return False
+        errorString = "Geben Sie nur 'm' oder 'w' ein."
+        print(errorString)
+        return errorString
 
 def checkEmail(userInput):
     pattern = r'^[\wÜÄÖß\+\.-]+@[\wÜÄÖß\+-]+\.[\wÜÄÖß\+-\.]+$'
@@ -39,21 +38,21 @@ def checkEmail(userInput):
 
     if re.match(pattern, userInput) is None:
         print(errorMassage)
-        return False
+        return errorMassage
     else:
         localPart, domainPart = userInput.split('@')
         domains = domainPart.split('.')
         if localPart[0] == "." or localPart[len(localPart)-1] == ".":
             print(errorMassage)
-            return False
+            return errorMassage
         elif ".." in localPart:
             print(errorMassage)
-            return False
+            return errorMassage
         else:
             for domain in domains:
                 if domain == "" or domain[0] == "-" or localPart[len(localPart)-1] == "-":
                     print(errorMassage)
-                    return False
+                    return errorMassage
     return True
 
 def chekPhone(userInput):
@@ -62,19 +61,22 @@ def chekPhone(userInput):
     userInput = re.sub(patternForRemove, '', userInput)
 
     if re.match(pattern, userInput) is False:
-        print("Ungültige Telefonnummer")
-        return False
+        errorMassage = "Ungültige Telefonnummer"
+        print(errorMassage)
+        return errorMassage
     else:
-        return userInput
+        return True
 
 def checkInsurance(userInput):
     if len(userInput) != 10:
-        print("Die Sozialversicherungsnummer muss aus 10 Zahlen bestehen")
-        return False
+        errorMassage = "Die Sozialversicherungsnummer muss aus 10 Zahlen bestehen"
+        print(errorMassage)
+        return errorMassage
     elif userInput.isnumeric():
         return True
     else:
-        return False
+        errorMassage = "Ungültige E-Mail"
+        return "errorMassage"
 
 def checkSrteetHouse(userInput):
     pattern = r'^[a-zA-ZüäößÜÄÖß][a-zA-ZüäößÜÄÖß \-\.]+[0-9]+([a-zA-ZüäößÜÄÖß \-\.\\])?$'
@@ -104,15 +106,15 @@ def checkDate(userInput):
         print(f"Incorrect Date. Format: dd.mm.yyyy")
         return False
 
-def checkData (userChoice, newData, typeOfPerson):
+def checkData(userChoice, newData, typeOfPerson):
 
     if typeOfPerson == "Employee":
         match int(userChoice):
             case 1 | 2 | 8:
                 return checkWord(newData,False)
-            case 3 | 9:
+            case 3:
                 return checkGeschlecht(newData)
-            case 4:
+            case 4 | 9:
                 return checkWord(newData,True)
             case 5:
                 return checkInsurance(newData)

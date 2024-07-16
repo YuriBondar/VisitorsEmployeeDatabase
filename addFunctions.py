@@ -14,7 +14,7 @@ def addAge(birthdayDate):
 # 1.Hinzufügen eines Mitarbeiters
 # 2.Hinzufügen eines Besuchers
 #-----------------------------------------------------------------------
-def fCreateNewEmployee():
+def createNewEmployee():
 
     # Daten für den Mitarbeiter
     #     Nachname
@@ -99,7 +99,7 @@ def fCreateNewEmployee():
 
     return employee
 
-def fCreateNewVisitor():
+def createNewVisitor():
     #     Daten für den Mitarbeiter:
     #     Nachname
     #     Vorname
@@ -149,9 +149,9 @@ def fCreateNewVisitor():
 
 def addNewRecordInterface(typeOfPerson):
     if typeOfPerson == "Employee":
-        newRecord = fCreateNewEmployee()
+        newRecord = createNewEmployee()
     else:
-        newRecord = fCreateNewVisitor()
+        newRecord = createNewVisitor()
     addRecordtoFile(newRecord, typeOfPerson)
     print("Die neuen Daten wurden gespeichert")
     input("Eine beliebige Taste Drucken")
