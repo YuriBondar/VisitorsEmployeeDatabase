@@ -47,12 +47,12 @@ def addNewRecordGUI(windowMain, typeOfPerson):
         entries.append(entry)
 
 # ----------------------------------------------------------------------------------------------------------
-    frame3 = tk.Frame(windowAdd, relief="raised", borderwidth=4)
-    frame3.grid(row=2, column=0, padx=10, pady=10, sticky="ew")
-    frame3.grid_columnconfigure(0, weight=1)
-    frame3.grid_rowconfigure(0, weight=1)
-    frame3.grid_rowconfigure(1, weight=1)
-    frame3.grid_columnconfigure(1, weight=1)
+    frameButtons = tk.Frame(windowAdd, relief="raised", borderwidth=4)
+    frameButtons.grid(row=2, column=0, padx=10, pady=10, sticky="ew")
+    frameButtons.grid_columnconfigure(0, weight=1)
+    frameButtons.grid_rowconfigure(0, weight=1)
+    frameButtons.grid_rowconfigure(1, weight=1)
+    frameButtons.grid_columnconfigure(1, weight=1)
 
 
     buttonSave = tk.Button(frame3, text="Daten Speichern", command=lambda: entryPerson(entries,typeOfPerson))
