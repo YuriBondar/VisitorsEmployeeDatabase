@@ -13,3 +13,8 @@ def firstLabelInFrame(window, text):
     label = tk.Label(frame1, text=text, bg="light gray")
     label.pack(pady=10, expand=True)
 
+def startConfigure(window):
+    window.grid_columnconfigure(0, weight=1)
+    window.grid_rowconfigure(0, weight=1)
+    window.grid_rowconfigure(1, weight=1)
+

@@ -30,9 +30,7 @@ def addNewRecordGUI(windowMain, typeOfPerson):
     atributesList = chooseAtributesList(typeOfPerson)
     windowAdd = tk.Tk()
     windowMain.destroy()
-    windowAdd.grid_columnconfigure(0, weight=1)
-    windowAdd.grid_rowconfigure(0, weight=1)
-    windowAdd.grid_rowconfigure(1, weight=1)
+    startConfigure(windowAdd)
 #---------------------------------------------------------------------------------------------------------
     firstLabelInFrame(windowAdd, f"Geben Sie die Daten des {translateTypeOfPerson(typeOfPerson)} an:")
 #----------------------------------------------------------------------------------------------------------
@@ -60,7 +58,7 @@ def addNewRecordGUI(windowMain, typeOfPerson):
     buttonSave = tk.Button(frame3, text="Daten Speichern", command=lambda: entryPerson(entries,typeOfPerson))
     buttonSave.grid(row=0, column=0, padx=15, pady=10, sticky="ew")
 
-    buttonMainMenu = tk.Button(frame3, text="Back to Main Menu", command=lambda: backToMainMenu(windowAdd))
+    buttonMainMenu = tk.Button(frame3, text="Hauptmenü", command=lambda: backToMainMenu(windowAdd))
     buttonMainMenu.grid(row=0, column=1, padx=15, pady=10, sticky="ew")
 
     buttonDelete = tk.Button(frame3, text="delete Dates", command=lambda: delEntries(entries))
