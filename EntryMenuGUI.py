@@ -32,17 +32,17 @@ def addNewRecordGUI(windowMain, typeOfPerson):
     windowMain.destroy()
     startConfigure(windowAdd)
 #---------------------------------------------------------------------------------------------------------
-    firstLabelInFrame(windowAdd, f"Geben Sie die Daten des {translateTypeOfPerson(typeOfPerson)} an:")
+    infoFrame(windowAdd, f"Geben Sie die Daten des {translateTypeOfPerson(typeOfPerson)} an:")
 #----------------------------------------------------------------------------------------------------------
-    frame2 = tk.Frame(windowAdd, relief="raised", borderwidth=4)
-    frame2.grid(row=1, column=0, padx=10, pady=10, sticky="ew")
+    frameInput = tk.Frame(windowAdd, relief="raised", borderwidth=4)
+    frameInput.grid(row=1, column=0, padx=10, pady=10, sticky="ew")
 
     entries = []
 
     for i in range(len(atributesList)):
-        label = tk.Label(frame2, text=atributesList[i], bg="light gray")
+        label = tk.Label(frameInput, text=atributesList[i], bg="light gray")
         label.grid(row=i, column=0, padx=15, pady=10, sticky="ew")
-        entry = tk.Entry(frame2)
+        entry = tk.Entry(frameInput)
         entry.grid(row=i, column=1, padx=15, pady=10, sticky="ew")
         entries.append(entry)
 
@@ -55,13 +55,13 @@ def addNewRecordGUI(windowMain, typeOfPerson):
     frameButtons.grid_columnconfigure(1, weight=1)
 
 
-    buttonSave = tk.Button(frame3, text="Daten Speichern", command=lambda: entryPerson(entries,typeOfPerson))
+    buttonSave = tk.Button(frameButtons, text="Daten Speichern", command=lambda: entryPerson(entries,typeOfPerson))
     buttonSave.grid(row=0, column=0, padx=15, pady=10, sticky="ew")
 
-    buttonMainMenu = tk.Button(frame3, text="Hauptmenü", command=lambda: backToMainMenu(windowAdd))
+    buttonMainMenu = tk.Button(frameButtons, text="Hauptmenü", command=lambda: backToMainMenu(windowAdd))
     buttonMainMenu.grid(row=0, column=1, padx=15, pady=10, sticky="ew")
 
-    buttonDelete = tk.Button(frame3, text="delete Dates", command=lambda: delEntries(entries))
+    buttonDelete = tk.Button(frameButtons, text="delete Dates", command=lambda: delEntries(entries))
     buttonDelete.grid(row=1, column=1, padx=15, pady=10, sticky="ew")
 
     windowAdd.mainloop()
