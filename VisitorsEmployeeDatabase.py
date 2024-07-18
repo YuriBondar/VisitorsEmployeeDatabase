@@ -1,16 +1,12 @@
 import csv
-
-
-
-
-from mainmenuGUI import mainmenuGUI
+from mainMenu import mainMenu
 
 #----------------------main----------------------------------------
 
 if __name__ == "__main__":
 
 
-    mainmenuGUI()
+    mainMenu()
 
 
 

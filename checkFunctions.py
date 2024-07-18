@@ -16,11 +16,15 @@ def checkWord(userInput, isPoint):
         return True
     else:
         if isPoint == True:
-            errorString = "Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.\n Das Feld darf nicht leer sein.\nAn der ersten und letzten Position darf kein Bindestrich stehen."
+            errorString = ("Geben Sie nur Buchstaben, Leerzeichen, Punkt oder das Zeichen '-' ein.\n "
+                           "Das Feld darf nicht leer sein.\n"
+                           "An der ersten und letzten Position darf kein Bindestrich stehen.")
             print(errorString)
             return errorString
         else:
-            errorString = "Geben Sie nur Buchstaben, Leerzeichen, oder das Zeichen '-' ein.\nAn der ersten Position darf kein Bindestrich und Punkt stehen\nAn der letzten Position darf kein Bindestrich stehen "
+            errorString = ("Geben Sie nur Buchstaben, Leerzeichen, oder das Zeichen '-' ein.\n"
+                           "An der ersten Position darf kein Bindestrich und Punkt stehen\n"
+                           "An der letzten Position darf kein Bindestrich stehen ")
             print(errorString)
             return errorString
 

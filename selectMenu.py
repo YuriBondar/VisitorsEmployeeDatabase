@@ -1,12 +1,12 @@
 from tkinter import messagebox
 
-from EntryMenuGUI import *
-from OutputMenuGUI import *
-from checkFunctions import *
+from entryMenu import *
+from printFullDatabaseMenu import *
 from dataFunctions import *
 from functionsGUI import *
 
 def select(entries, frameResults, windowSelect, typeOfPerson):
+    atributesList = chooseAtributesList(typeOfPerson)
     for widget in frameResults.winfo_children():
         widget.destroy()
 
@@ -18,8 +18,16 @@ def select(entries, frameResults, windowSelect, typeOfPerson):
         if entry.get() != "":
             filterList.append(entry.get())
     if not filterList:
-        messagebox.showerror("Error", f" Searching list is empty")
+        messagebox.showerror("Error", f" Suchliste ist leer")
         return
+
+    for index, entry in enumerate(entries):
+        if entry.get() != "":
+            if checkData(index+1, entry.get(), typeOfPerson) is not True:
+                errorMessage = checkData(index+1, entry.get(), typeOfPerson)
+                currentPerson = atributesList[index]
+                messagebox.showerror("Error", f" Field {currentPerson} : {errorMessage}")
+                return
 
     for person, dates in database.items():
         if all(elem in dates for elem in filterList):
@@ -28,9 +36,13 @@ def select(entries, frameResults, windowSelect, typeOfPerson):
     outputSelectionFrame(resultSelection, windowSelect, frameResults, typeOfPerson)
     return resultSelection
 
+# ---------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+# -------------------SELECT MENU-----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
 
-
-def selectMenuGUI(windowMain, typeOfPerson):
+def selectMenu(windowMain, typeOfPerson):
     atributesList = chooseAtributesList(typeOfPerson)
 
     windowSelect = tk.Tk()
@@ -39,7 +51,8 @@ def selectMenuGUI(windowMain, typeOfPerson):
 # ---------------------------------------------------------------------------------------------------------
 # ---------------- INFO FRAME------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------------------------
-    infoFrame(windowSelect, f"Geben Sie die Daten ein, nach denen Sie die {translateTypeOfPerson(typeOfPerson)} filtern möchten")
+    infoFrame(windowSelect, f"Geben Sie die Daten ein, nach denen Sie die {translateTypeOfPerson(typeOfPerson)} "
+                            f"filtern möchten")
 # ---------------------------------------------------------------------------------------------------------
 # ---------------- INPUT FRAME------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------------------------
@@ -58,10 +71,12 @@ def selectMenuGUI(windowMain, typeOfPerson):
         entry.grid(row=1, column=i+1, padx=8, pady=10, sticky="ew")
         entries.append(entry)
 # ---------------------------------------------------------------------------------------------------------
-# ---------------- TWO EMPTY FRAME------------------------------------------------------------------------------
+# ---------------- RESULTS FRAME------------------------------------------------------------------------------
 # ---------------------------------------------------------------------------------------------------------
     frameResults = tk.Frame(windowSelect, relief="raised", borderwidth=4)
     frameResults.grid(row=2, column=0, padx=8, pady=10, sticky="new")
+    for i in range(len(atributesList)+1):
+        frameResults.grid_columnconfigure(i, weight=1)
 
 
 # ---------------------------------------------------------------------------------------------------------
@@ -77,37 +92,6 @@ def selectMenuGUI(windowMain, typeOfPerson):
     buttonMainMenu = tk.Button(frameButtons, text="Hauptmenü", command=lambda: backToMainMenu(windowSelect))
     buttonMainMenu.grid(row=0, column=1, padx=15, pady=10, sticky="ew")
 
-    # def select(entries, frameResults, frameChangeButton, windowSelect, typeOfPerson):
-    #     for widget in frameResults.winfo_children():
-    #         widget.destroy()
-    #
-    #     database = fileToDictionary(typeOfPerson)
-    #     filterList = []
-    #     resultSelection = {}
-    #
-    #     for entry in entries:
-    #         if entry.get() != "":
-    #             filterList.append(entry.get())
-    #     if not filterList:
-    #         messagebox.showerror("Error", f" Searching list is empty")
-    #         return
-    #
-    #     for person, dates in database.items():
-    #         if all(elem in dates for elem in filterList):
-    #             resultSelection.update({person: dates})
-    #
-    #     outputSelectionFrame(resultSelection, windowSelect, frameResults, typeOfPerson)
-    #     nonlocal buttonChangeMenu
-    #     if resultSelection:
-    #         buttonChangeMenu.config(
-    #             state="normal",
-    #             command=lambda: (
-    #             print("Button clicked!"), changeMenuGUI(windowSelect, resultSelection, typeOfPerson))
-    #         )
-    #     else:
-    #         buttonChangeMenu.config(state="disabled")
 
-    # buttonChangeMenu = tk.Button(frameButtons, text="Changemenü", command=lambda: toChangeMenu(windowSelect, typeOfPerson))
-    # buttonChangeMenu.grid(row=0, column=2, padx=15, pady=10, sticky="ew")
 
 
