@@ -1,34 +1,13 @@
 import csv
 import os
 from datetime import datetime
-#-------------------------------------------------------------------------
-#--------List mit Nummern ab 1 anzeigen, um verschiedene Menüs anzuzeigen
-#-------------------------------------------------------------------------
-def printList(listItems):
-    i = 0
-    for listItem in listItems:
-        i = i + 1
-        print(f"{i}. {listItem}")
-    return i
+from dateutil.relativedelta import relativedelta
 
 def translateTypeOfPerson(typeOfPerson):
     if typeOfPerson == "Employee":
         return "Mitarbeiter"
     else:
         return "Besucher"
-def printDictinary(dictinary, typeOfPerson):
-    typeOfPersonGer = translateTypeOfPerson(typeOfPerson)
-    print("---------------------------------------------------------------------------------------------------------------------")
-    print(f"{typeOfPersonGer}: {chooseAtributesList(typeOfPerson)}")
-    print("----------------------------------------------------------------------------------------------------------------------")
-    for person, value in dictinary.items():
-        print(f"{person} : {value}")
-    print("----------------------------------------------------------------------------------------------------------------------")
-    input("Eine beliebige Taste drücken")
-
-def printFullDatabase(typeOfPerson):
-    database = fileToDictionary(typeOfPerson)
-    printDictinary(database, typeOfPerson)
 
 #---------------------------------------------------------------------------
 def chooseAtributesList(typeOfPerson):
@@ -70,26 +49,31 @@ def getMainMenuItems():
                  "Das Programm beenden"]
     return menuItems
 
-def printBirthdaysEmployee():
+def birthdaysEmployee():
     currentMonth = datetime.now().month
+    nextMonth = (datetime.now() + relativedelta(month=1)).month
     database = fileToDictionary("Employee")
-
-    print(f"-------------------------------------------------------")
-    print(f"-------------------------------------------------------")
-    print(f"Geburtstage von Mitarbeitern:")
+    birthdayList = []
+    i = 0
 
     for person, value in database.items():
         birthdayDate = datetime.strptime(value[10], "%d.%m.%Y")
-        if currentMonth == birthdayDate.month:
-            differenceDays = datetime.now().day - birthdayDate.day
+        if currentMonth == birthdayDate.month or nextMonth == birthdayDate.month:
+            differenceDays = birthdayDate.day - datetime.now().day
             if differenceDays > 0:
-                birthdayString = "Es sind" + str(differenceDays) + " Tage seit dem Geburtstag vergangen"
+                specialString = f"Bis zum Geburstag {differenceDays} Tage"
             elif differenceDays < 0:
-                birthdayString = str(abs(differenceDays)) + " Tage bis zum Geburtstag"
+                specialString = f"Der Geburstag ist {abs(differenceDays)} Tage her"
             else:
-                birthdayString = "Der Geburstag ist heute"
-            print(f"{value[0]} {value[1]} - {birthdayString}")
-    input("Eine beliebige Taste drücken")
+                specialString = "Der Geburstag ist heute!"
+            birthdayList.append([value[0], value[1], value[10], specialString, differenceDays])
+
+    birthdayList = sorted(birthdayList, key=lambda x: x[4])
+    for person in birthdayList:
+        del person[4]
+
+    return birthdayList
+
 
 
 #-------------------------------------------------------------------------------

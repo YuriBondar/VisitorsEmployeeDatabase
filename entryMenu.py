@@ -26,6 +26,7 @@ def entryMenu(windowMain, typeOfPerson):
     atributesList = chooseAtributesList(typeOfPerson)
     windowMain.destroy()
     windowAdd = tk.Tk()
+    windowAdd.geometry("500x700+500+80")
     windowAdd.title("Der Datenbank für Mitarbeiter*innen und Besucher*innen")
     startConfigure(windowAdd)
 # ---------------------------------------------------------------------------------------------------------

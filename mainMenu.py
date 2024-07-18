@@ -1,4 +1,4 @@
-
+from birthdayListMenu import birthdayListMenu
 from entryMenu import *
 from changeAndUpdateMenu import *
 from selectMenu import *
@@ -23,13 +23,14 @@ def getMainMenuButtons(menuItems, windowMain):
                        [menuItems[5], lambda: printFullDatabaseMenu(windowMain,"Visitor")],
                        [menuItems[6], lambda: changeMenuGUI(windowMain,"Employee")],
                        [menuItems[7], lambda: changeMenuGUI(windowMain, "Visitor")],
-                       [menuItems[8], lambda: printBirthdaysEmployeeGUI()],
+                       [menuItems[8], lambda: birthdayListMenu(windowMain)],
                        [menuItems[9], lambda: closeDatabase()]]
     return mainMenuButtons
 
 
 def mainMenu():
     windowMain = tk.Tk()
+    windowMain.geometry("500x600+500+100")
     windowMain.title("Der Datenbank für Mitarbeiter*innen und Besucher*innen")
     startConfigure(windowMain)
 # ---------------------------------------------------------------------------------------------------------

@@ -9,9 +9,13 @@ def printDatabase(database,windowMain,typeOfPerson):
     windowPrint = tk.Tk()
     windowMain.destroy()
     startConfigure(windowPrint)
-#----------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+# ---------------- INFO FRAME------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
     infoFrame(windowPrint, f"{typeOfPerson}datenbank")
-#----------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+# ---------------- RESULTS FRAME------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
     frameResults = tk.Frame(windowPrint, relief="raised", borderwidth=4)
     frameResults.grid(row=1, column=0, padx=10, pady=10, sticky="new")
     for i in range(len(atributesList) + 1):
@@ -19,10 +23,10 @@ def printDatabase(database,windowMain,typeOfPerson):
 
     outputSelectionFrame(database, windowPrint, frameResults, typeOfPerson)
 # ----------------------------------------------------------------------
-    frame3 = tk.Frame(windowPrint, relief="raised", borderwidth=4)
-    frame3.grid(row=2, column=0, padx=10, pady=10, sticky="ew")
+    frameButtons = tk.Frame(windowPrint, relief="raised", borderwidth=4)
+    frameButtons.grid(row=2, column=0, padx=10, pady=10, sticky="ew")
 
-    buttonMainMenu = tk.Button(frame3, text="Hauptmenü", command=lambda: backToMainMenu(windowPrint))
+    buttonMainMenu = tk.Button(frameButtons, text="Hauptmenü", command=lambda: backToMainMenu(windowPrint))
     buttonMainMenu.grid(row=0, column=1, padx=15, pady=10, sticky="ew")
 
     windowPrint.mainloop()
