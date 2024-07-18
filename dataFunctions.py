@@ -98,10 +98,8 @@ def printBirthdaysEmployee():
 def writeDictionaryToFile(fullDictinary, typeOfPerson):
     if typeOfPerson == "Employee":
         fileName = "Employees.csv"
-    elif typeOfPerson == "Employee":
-        fileName = "Visitors.csv"
     else:
-        fileName = "Selection.csv"
+        fileName = "Visitors.csv"
     try:
         with open(fileName, 'w', newline='') as file:
             writer = csv.writer(file)
@@ -113,10 +111,8 @@ def writeDictionaryToFile(fullDictinary, typeOfPerson):
 def fileToDictionary(typeOfPerson):
     if typeOfPerson == "Employee":
         fileName = "Employees.csv"
-    elif typeOfPerson == "Employee":
-        fileName = "Visitors.csv"
     else:
-        fileName = "Selection.csv"
+        fileName = "Visitors.csv"
     fullDictinary = {}
     typeOfPersonGer = translateTypeOfPerson(typeOfPerson)
     i = 0
